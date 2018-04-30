@@ -1,4 +1,4 @@
-package main.java.DAOs.Rest;
+package Rest;
 
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.grizzly.http.server.StaticHttpHandler;

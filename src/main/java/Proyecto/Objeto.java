@@ -2,7 +2,7 @@ package Proyecto;
 
 public class Objeto {
 
-
+    private int id;
 
     private String Nombre;
 
@@ -14,7 +14,8 @@ public class Objeto {
 
     private int Coste;
 
-
+    public Objeto() {
+    }
 
     public Objeto(String nombre, String tipo, String descripcion, int valor, int coste) {
 
@@ -81,4 +82,8 @@ public class Objeto {
     public void setCoste(int coste) {
         Coste = coste;
     }
+
+    public int getId() { return id; }
+
+    public void setId(int id) { this.id = id; }
 }

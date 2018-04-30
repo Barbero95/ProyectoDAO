@@ -14,5 +14,4 @@ public class MyExceptionMapper implements ExceptionMapper<Exception> {
               .build();
     }
 
-
 }

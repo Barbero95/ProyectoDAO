@@ -14,9 +14,9 @@ public class Conectar {
      * @throws SQLException
      */
     public void conectar() throws SQLException {
-        String url = "jdbc:mysql://localhost:3306/stucomcrossing";
+        String url = "jdbc:mysql://localhost:3306/proyecto";
         String user = "root";
-        String pass = "";
+        String pass = "david";
         connection = DriverManager.getConnection(url, user, pass);
     }
 

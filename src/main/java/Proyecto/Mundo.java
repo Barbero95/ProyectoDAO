@@ -1,5 +1,8 @@
 package Proyecto;
 
+import DAOs.*;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7,13 +10,25 @@ import java.util.List;
 public class Mundo {
     private List<Usuario> usuarioList = new ArrayList<Usuario>();
     private HashMap<String,Usuario> mapaUsuarios = new HashMap<String,Usuario>();
+    UsuarioDAO userDao = new UsuarioDAO();
+    Conectar connect = new Conectar();
 
     public Mundo() {
 
     }
-
+    public void crearUsuarioDAO (Usuario user) throws SQLException, ExceptionDAO{
+        try{
+            connect.conectar();
+            userDao.insertUser(user);
+        } catch (SQLException ex){
+            throw new ExceptionDAO("No se ha podido connectar");
+        }
+        finally {
+            connect.desconectar();
+        }
+    }
     public boolean crearUsuario(Usuario user) {
-        Usuario u = this.mapaUsuarios.get(user.getNombre());
+        //Usuario u = this.mapaUsuarios.get(user.getNombre());
         int encontrado=0;
         for(int i=0; i<usuarioList.size();i++)
         {
