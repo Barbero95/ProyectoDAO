@@ -23,15 +23,15 @@ public class ObjetoDAO {
         if (existObjct(obj)) {
             throw new ExceptionDAO("Ya existe el objeto");
         }
-        String query = "INSERT INTO objeto VALUES (?,?,?,?,?,?)";
+        String query = "INSERT INTO objeto VALUES (NULL,?,?,?,?,?)";
         PreparedStatement ps = Conectar.connection.prepareStatement(query);
 
-        ps.setInt(1, obj.getId());
-        ps.setString(2, obj.getNombre());
-        ps.setString(3, obj.getTipo());
-        ps.setString(4, obj.getDescripcion());
-        ps.setInt(5, obj.getValor());
-        ps.setInt(6, obj.getCoste());
+        //ps.setInt(1, obj.getId());
+        ps.setString(1, obj.getNombre());
+        ps.setString(2, obj.getTipo());
+        ps.setString(3, obj.getDescripcion());
+        ps.setInt(4, obj.getValor());
+        ps.setInt(5, obj.getCoste());
 
         ps.executeUpdate();
         ps.close();
@@ -55,7 +55,7 @@ public class ObjetoDAO {
     }
 
     //para tal como cree el objeto me de el identificador
-    public int daElIdentificador(String Objname)throws SQLException{
+    public int darElIdentificador(String Objname)throws SQLException{
         int idObjeto = 0;
         String select = "SELECT id FROM objeto WHERE nombre='" + Objname + "'";
         Statement st = Conectar.connection.createStatement();
@@ -130,7 +130,7 @@ public class ObjetoDAO {
      * @throws SQLException
      */
     private boolean existObjct(Objeto o) throws SQLException {
-        String select = "SELECT * FROM Objeto WHERE username='" + o.getNombre() + "'";
+        String select = "SELECT * FROM objeto WHERE nombre='" + o.getNombre() + "'";
         Statement st = Conectar.connection.createStatement();
         boolean exist = false;
         ResultSet rs = st.executeQuery(select);
@@ -144,7 +144,7 @@ public class ObjetoDAO {
 
     //inventari
     public void insertInventario (Usuario user, Objeto obj) throws SQLException{
-        String query = "INSERT INTO objeto VALUES (?,?)";
+        String query = "INSERT INTO inventario VALUES (NULL,?,?)";
         PreparedStatement ps = Conectar.connection.prepareStatement(query);
 
         ps.setString(1, user.getNombre());

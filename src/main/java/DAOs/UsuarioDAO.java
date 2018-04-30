@@ -114,19 +114,21 @@ public class UsuarioDAO {
     }
 
     //DELETE
-    public boolean deleteUser(Usuario user) throws SQLException {
+    public boolean deleteUser(Usuario user) throws SQLException, ExceptionDAO {
         boolean result = false;
-        String query = "DELETE FROM usuario WHERE username='" + user.getNombre() + "'";
         Statement st = Conectar.connection.createStatement();
+        try {
 
-        ResultSet rs = st.executeQuery(query);
-        if (rs.next()) {
-            result=true;
+            String delete = "DELETE FROM usuario WHERE username='" + user.getNombre() + "'";
+            st.executeUpdate(delete);
+            result = true;
+
+        } catch (SQLException ex) {
+            throw new ExceptionDAO("No se ha podido modificar el usuario");
+        } finally {
+            st.close();
+            return result;
         }
-        rs.close();
-        st.close();
-
-        return result;
     }
 
 }

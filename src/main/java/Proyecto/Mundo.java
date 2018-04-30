@@ -13,7 +13,7 @@ public class Mundo {
     private HashMap<String,Objeto> mapaObjetos = new HashMap<>();
     UsuarioDAO userDao = new UsuarioDAO();
     ObjetoDAO objDAO = new ObjetoDAO();
-    Conectar connect = new Conectar();
+
 
     public Mundo() {
 
@@ -21,28 +21,20 @@ public class Mundo {
     public void crearObjetoDAO (Objeto obj)throws SQLException, ExceptionDAO{
         int idObj;
         try{
-            connect.conectar();
             objDAO.insertObject(obj);
-            idObj = objDAO.daElIdentificador(obj.getNombre());
+            idObj = objDAO.darElIdentificador(obj.getNombre());
             obj.setId(idObj);
             //String r= String.valueOf(idObj);
             //mapaObjetos.put(r,obj);
         } catch (SQLException ex){
-            throw new ExceptionDAO("No se ha podido connectar");
-        }
-        finally {
-            connect.desconectar();
+            throw new ExceptionDAO("No se ha podido crear");
         }
     }
     public void crearUsuarioDAO (Usuario user) throws SQLException, ExceptionDAO{
         try{
-            connect.conectar();
             userDao.insertUser(user);
         } catch (SQLException ex){
             throw new ExceptionDAO("No se ha podido connectar");
-        }
-        finally {
-            connect.desconectar();
         }
     }
     public boolean crearUsuario(Usuario user) {
@@ -67,14 +59,11 @@ public class Mundo {
     }
     public void eliminarUsuarioDAO(Usuario user)throws SQLException, ExceptionDAO {
         try{
-            connect.conectar();
             userDao.deleteUser(user);
         } catch (SQLException ex){
             throw new ExceptionDAO("No se ha podido connectar");
         }
-        finally {
-            connect.desconectar();
-        }
+
     }
 
     public boolean eliminarUsuario(String nombre) {
@@ -93,13 +82,11 @@ public class Mundo {
     public Usuario consultarUsuarioDAO (Usuario user) throws SQLException, ExceptionDAO{
         Usuario usuario=null;
         try{
-            connect.conectar();
             usuario = userDao.returnUser(user.getNombre(),user.getPassword());
         } catch (SQLException ex){
             throw new ExceptionDAO("No se ha podido connectar");
         }
         finally {
-            connect.desconectar();
             return usuario;
         }
     }
@@ -117,13 +104,9 @@ public class Mundo {
     //añade a inventario la realcion entre el usuario y el objeto
     public void añadirObjetoAUsuarioDAO (Usuario u, Objeto o) throws SQLException, ExceptionDAO{
         try{
-            connect.conectar();
             objDAO.insertInventario(u,o);
         } catch (SQLException ex){
-            throw new ExceptionDAO("No se ha podido connectar");
-        }
-        finally {
-            connect.desconectar();
+            throw new ExceptionDAO("No se ha podido añadir objeto");
         }
     }
     public void añadirObjetoAUsuario(Usuario u, Objeto o){
@@ -133,13 +116,11 @@ public class Mundo {
     public Objeto consultarObjetoDeUsuarioDAO (Usuario user, int idObjeto)throws SQLException, ExceptionDAO{
         Objeto obj=null;
         try{
-            connect.conectar();
             obj = objDAO.objetoDeUnUsuario(user,idObjeto);
         } catch (SQLException ex){
-            throw new ExceptionDAO("No se ha podido connectar");
+            throw new ExceptionDAO("No se ha podido consultar el objeto");
         }
         finally {
-            connect.desconectar();
             return obj;
         }
     }
@@ -156,13 +137,11 @@ public class Mundo {
     public boolean eliminarObjetosDeUsuarioDAO (Usuario u, int idObjeto)throws SQLException,ExceptionDAO{
         boolean result = false;
         try{
-            connect.conectar();
             result = objDAO.sacarDeInventario(u,idObjeto);
         } catch (SQLException ex){
-            throw new ExceptionDAO("No se ha podido connectar");
+            throw new ExceptionDAO("No se ha podido eliminar");
         }
         finally {
-            connect.desconectar();
             return result;
         }
     }
@@ -176,13 +155,11 @@ public class Mundo {
     public boolean eliminarObjeto (Objeto obj)throws SQLException,ExceptionDAO{
         boolean result = false;
         try{
-            connect.conectar();
             result = objDAO.deleteObject(obj);
         } catch (SQLException ex){
-            throw new ExceptionDAO("No se ha podido connectar");
+            throw new ExceptionDAO("No se ha podido eliminar objeto");
         }
         finally {
-            connect.desconectar();
             return result;
         }
     }
@@ -194,15 +171,11 @@ public class Mundo {
         origen.getObjetoList().remove(o);
     }
     public void transferirObjetoEntreUsuariosDAO (Usuario origen, Usuario destino, Objeto obj)throws SQLException,ExceptionDAO{
-
         try{
             objDAO.sacarDeInventario(origen,obj.getId());
             objDAO.insertInventario(destino,obj);
         } catch (SQLException ex){
             throw new ExceptionDAO("No se ha podido connectar");
-        }
-        finally {
-            connect.desconectar();
         }
     }
 
