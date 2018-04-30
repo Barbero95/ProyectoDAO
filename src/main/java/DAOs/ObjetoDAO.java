@@ -23,14 +23,15 @@ public class ObjetoDAO {
         if (existObjct(obj)) {
             throw new ExceptionDAO("Ya existe el objeto");
         }
-        String query = "INSERT INTO objeto VALUES (?,?,?,?,?)";
+        String query = "INSERT INTO objeto VALUES (?,?,?,?,?,?)";
         PreparedStatement ps = Conectar.connection.prepareStatement(query);
 
-        ps.setString(1, obj.getNombre());
-        ps.setString(2, obj.getTipo());
-        ps.setString(3, obj.getDescripcion());
-        ps.setInt(4, obj.getValor());
-        ps.setInt(5, obj.getCoste());
+        ps.setInt(1, obj.getId());
+        ps.setString(2, obj.getNombre());
+        ps.setString(3, obj.getTipo());
+        ps.setString(4, obj.getDescripcion());
+        ps.setInt(5, obj.getValor());
+        ps.setInt(6, obj.getCoste());
 
         ps.executeUpdate();
         ps.close();
@@ -38,13 +39,75 @@ public class ObjetoDAO {
     }
 
     //Select
-
-    public boolean selectObjeto (String username, String password) throws SQLException {
+    public boolean validateObjeto(String Objname) throws SQLException {
         boolean validar = false;
+        String select = "SELECT * FROM objeto WHERE nombre='" + Objname + "'";
+        Statement st = Conectar.connection.createStatement();
+
+        ResultSet rs = st.executeQuery(select);
+        if (rs.next()) {
+            validar = true;
+        }
+        rs.close();
+        st.close();
+
         return validar;
     }
-//UPDATES
-        //
+
+    //para tal como cree el objeto me de el identificador
+    public int daElIdentificador(String Objname)throws SQLException{
+        int idObjeto = 0;
+        String select = "SELECT id FROM objeto WHERE nombre='" + Objname + "'";
+        Statement st = Conectar.connection.createStatement();
+        ResultSet rs = st.executeQuery(select);
+        if (rs.next()) {
+            idObjeto = rs.getInt("id");
+        }
+        rs.close();
+        st.close();
+
+        return idObjeto;
+    }
+
+    public Objeto returnObject (int identificador) throws SQLException, ExceptionDAO{
+        String query = "SELECT * FROM objeto WHERE id='" + identificador + "'";
+        Statement st = Conectar.connection.createStatement();
+
+        ResultSet rs = st.executeQuery(query);
+        Objeto obj = new Objeto();
+
+        if(rs.next()){
+            obj.setId(rs.getInt("id"));
+            obj.setNombre(rs.getString("nombre"));
+            obj.setTipo(rs.getString("tipo"));
+            obj.setDescripcion(rs.getString("descripcion"));
+            obj.setValor(rs.getInt("valor"));
+            obj.setCoste(rs.getInt("coste"));
+        }
+        rs.close();
+        st.close();
+
+        return obj;
+    }
+
+
+    //DELETE
+    public boolean deleteObject (Objeto obj) throws SQLException {
+        boolean result = false;
+        String select = "DELETE FROM objeto WHERE id='" + obj.getId() + "'";
+        Statement st = Conectar.connection.createStatement();
+
+        ResultSet rs = st.executeQuery(select);
+        if (rs.next()) {
+            result=true;
+        }
+        rs.close();
+        st.close();
+
+        return result;
+    }
+    //UPDATES
+        //son ejemplos debemos poner los que podemos hacer
     public void modificarObjeto(int identificador, Objeto acctObj) throws SQLException, ExceptionDAO{
         Statement st = Conectar.connection.createStatement();
         try {
@@ -59,21 +122,6 @@ public class ObjetoDAO {
         }
     }
 
-    public boolean validateObjeto(String Objname) throws SQLException {
-        boolean validar = false;
-        String select = "SELECT * FROM objecto WHERE Objname='" + Objname + "'";
-        Statement st = Conectar.connection.createStatement();
-
-        ResultSet rs = st.executeQuery(select);
-        if (rs.next()) {
-            validar = true;
-        }
-        rs.close();
-        st.close();
-
-        return validar;
-    }
-
     /*
      * Funcion que comprueva si un objeto existe en la base de datos
      *
@@ -81,7 +129,7 @@ public class ObjetoDAO {
      * @return
      * @throws SQLException
      */
-    private boolean existObjct(Proyecto.Objeto o) throws SQLException {
+    private boolean existObjct(Objeto o) throws SQLException {
         String select = "SELECT * FROM Objeto WHERE username='" + o.getNombre() + "'";
         Statement st = Conectar.connection.createStatement();
         boolean exist = false;
@@ -95,7 +143,7 @@ public class ObjetoDAO {
     }
 
     //inventari
-    public void insertInventario (Usuario user, Objeto obj) throws SQLException, ExceptionDAO{
+    public void insertInventario (Usuario user, Objeto obj) throws SQLException{
         String query = "INSERT INTO objeto VALUES (?,?)";
         PreparedStatement ps = Conectar.connection.prepareStatement(query);
 
@@ -105,11 +153,25 @@ public class ObjetoDAO {
         ps.executeUpdate();
         ps.close();
     }
+    public boolean sacarDeInventario (Usuario user, int idObjeto)throws SQLException{
+        boolean result = false;
+        String select = "DELETE FROM inventario WHERE objeto='" + idObjeto + "', usuario='" + user.getNombre() +  "'";
+        Statement st = Conectar.connection.createStatement();
+
+        ResultSet rs = st.executeQuery(select);
+        if (rs.next()) {
+            result=true;
+        }
+        rs.close();
+        st.close();
+
+        return result;
+    }
 
 
-    //montar inventario
+    //montar inventario en una lista de objetos
 
-    public List<Objeto> insertInventario (Usuario user) throws SQLException, ExceptionDAO{
+    public List<Objeto> dameInventario (Usuario user) throws SQLException, ExceptionDAO{
         String query = "SELECT objeto FROM inventario WHERE usuario='" + user.getNombre() + "'";
         List<Objeto> listaObjetos = new ArrayList<Objeto>();
         Statement st = Conectar.connection.createStatement();
@@ -124,25 +186,26 @@ public class ObjetoDAO {
         return listaObjetos;
     }
 
-    private Objeto returnObject (int identificador) throws SQLException, ExceptionDAO{
-        String query = "SELECT * FROM objeto WHERE id='" + identificador + "'";
+    //dame un objeto de un usuario
+    public Objeto objetoDeUnUsuario (Usuario user, int idObj)throws SQLException, ExceptionDAO{
+        String query = "SELECT objeto FROM inventario WHERE usuario='" + user.getNombre() + "'";
         Statement st = Conectar.connection.createStatement();
 
         ResultSet rs = st.executeQuery(query);
-        Objeto obj = new Objeto();
+        Objeto objeto = null;
 
         if(rs.next()){
-            obj.setNombre(rs.getString("nombre"));
-            obj.setTipo(rs.getString("tipo"));
-            obj.setDescripcion(rs.getString("descripcion"));
-            obj.setValor(rs.getInt("valor"));
-            obj.setCoste(rs.getInt("coste"));
+            objeto = returnObject(rs.getInt("objeto"));
+        }
+        if(idObj != objeto.getId()){
+            objeto = null;
         }
         rs.close();
         st.close();
 
-        return obj;
+        return objeto;
     }
+
 }
 
 

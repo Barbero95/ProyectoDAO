@@ -116,10 +116,10 @@ public class UsuarioDAO {
     //DELETE
     public boolean deleteUser(Usuario user) throws SQLException {
         boolean result = false;
-        String select = "DELETE FROM usuario WHERE username='" + user.getNombre() + "'";
+        String query = "DELETE FROM usuario WHERE username='" + user.getNombre() + "'";
         Statement st = Conectar.connection.createStatement();
 
-        ResultSet rs = st.executeQuery(select);
+        ResultSet rs = st.executeQuery(query);
         if (rs.next()) {
             result=true;
         }
