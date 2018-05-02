@@ -1,5 +1,10 @@
 package Proyecto;
 
+import Proyecto.Escenario;
+import Proyecto.Mundo;
+import Proyecto.Objeto;
+import Proyecto.Usuario;
+
 import java.util.Scanner;
 
 public class MainBasico {

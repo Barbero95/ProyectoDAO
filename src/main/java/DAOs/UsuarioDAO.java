@@ -14,22 +14,27 @@ import java.util.logging.Logger;
 public class UsuarioDAO {
 
     //INSERTS
-    public void insertUser(Usuario u) throws SQLException, ExceptionDAO {
+    public boolean insertUser(Usuario u) throws SQLException, ExceptionDAO {
+        boolean resp = false;
         if (existUser(u)) {
             throw new ExceptionDAO("Usuario ya existe");
+        } else {
+            String query = "INSERT INTO usuario VALUES (?,?,?,?,?,?)";
+            PreparedStatement ps = Conectar.connection.prepareStatement(query);
+
+            ps.setString(1, u.getNombre());
+            ps.setString(2, u.getPassword());
+            ps.setInt(3, u.getVida());
+            ps.setInt(4, u.getAtaque());
+            ps.setInt(5, u.getDefensa());
+            ps.setInt(6, u.getResistencia());
+
+            ps.executeUpdate();
+            ps.close();
+            resp = true;
         }
-        String query = "INSERT INTO usuario VALUES (?,?,?,?,?,?)";
-        PreparedStatement ps = Conectar.connection.prepareStatement(query);
+        return resp;
 
-        ps.setString(1, u.getNombre());
-        ps.setString(2, u.getPassword());
-        ps.setInt(3, u.getVida());
-        ps.setInt(4, u.getAtaque());
-        ps.setInt(5, u.getDefensa());
-        ps.setInt(6, u.getResistencia());
-
-        ps.executeUpdate();
-        ps.close();
     }
 
     //UPDATES
@@ -78,7 +83,7 @@ public class UsuarioDAO {
 
         ResultSet rs = st.executeQuery(select);
         if (rs.next()) {
-            user.setNombre(rs.getString("nombre"));
+            user.setNombre(rs.getString("username"));
             user.setPassword(rs.getString("password"));
             user.setVida(rs.getInt("vida"));
             user.setAtaque(rs.getInt("ataque"));
@@ -90,6 +95,27 @@ public class UsuarioDAO {
 
         return user;
     }
+    //solo con el nombre
+    public Usuario infoUser(String username) throws SQLException {
+        Usuario user = new Usuario();
+        String select = "SELECT * FROM usuario WHERE username='" + username + "'";
+        Statement st = Conectar.connection.createStatement();
+
+        ResultSet rs = st.executeQuery(select);
+        if (rs.next()) {
+            user.setNombre(rs.getString("username"));
+            user.setPassword(rs.getString("password"));
+            user.setVida(rs.getInt("vida"));
+            user.setAtaque(rs.getInt("ataque"));
+            user.setDefensa(rs.getInt("defensa"));
+            user.setResistencia(rs.getInt("resistencia"));
+        }
+        rs.close();
+        st.close();
+
+        return user;
+    }
+
 
 
 
@@ -114,12 +140,12 @@ public class UsuarioDAO {
     }
 
     //DELETE
-    public boolean deleteUser(Usuario user) throws SQLException, ExceptionDAO {
+    public boolean deleteUser(String user) throws SQLException, ExceptionDAO {
         boolean result = false;
         Statement st = Conectar.connection.createStatement();
         try {
 
-            String delete = "DELETE FROM usuario WHERE username='" + user.getNombre() + "'";
+            String delete = "DELETE FROM usuario WHERE username='" + user + "'";
             st.executeUpdate(delete);
             result = true;
 

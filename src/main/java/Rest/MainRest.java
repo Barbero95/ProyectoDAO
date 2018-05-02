@@ -23,7 +23,7 @@ public class MainRest {
     public static HttpServer startServer() {
         // create a resource config that scans for JAX-RS resources and providers
         // in edu.upc.dsa package
-        final ResourceConfig rc = new ResourceConfig().packages("dsa");
+        final ResourceConfig rc = new ResourceConfig().packages("Rest","Proyecto","DAOs");
 
         // create and start a new instance of grizzly http server
         // exposing the Jersey application at BASE_URI

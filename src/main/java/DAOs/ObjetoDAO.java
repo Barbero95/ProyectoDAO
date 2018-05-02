@@ -19,22 +19,26 @@ import java.util.logging.Logger;
 public class ObjetoDAO {
 
     //INSERTS
-    public void insertObject(Objeto obj) throws SQLException, ExceptionDAO {
+    public boolean insertObject(Objeto obj) throws SQLException, ExceptionDAO {
+        boolean resp = false;
         if (existObjct(obj)) {
             throw new ExceptionDAO("Ya existe el objeto");
+        } else {
+            String query = "INSERT INTO objeto VALUES (NULL,?,?,?,?,?)";
+            PreparedStatement ps = Conectar.connection.prepareStatement(query);
+
+            //ps.setInt(1, obj.getId());
+            ps.setString(1, obj.getNombre());
+            ps.setString(2, obj.getTipo());
+            ps.setString(3, obj.getDescripcion());
+            ps.setInt(4, obj.getValor());
+            ps.setInt(5, obj.getCoste());
+
+            ps.executeUpdate();
+            ps.close();
+            resp = true;
         }
-        String query = "INSERT INTO objeto VALUES (NULL,?,?,?,?,?)";
-        PreparedStatement ps = Conectar.connection.prepareStatement(query);
-
-        //ps.setInt(1, obj.getId());
-        ps.setString(1, obj.getNombre());
-        ps.setString(2, obj.getTipo());
-        ps.setString(3, obj.getDescripcion());
-        ps.setInt(4, obj.getValor());
-        ps.setInt(5, obj.getCoste());
-
-        ps.executeUpdate();
-        ps.close();
+        return resp;
 
     }
 
@@ -94,17 +98,17 @@ public class ObjetoDAO {
     //DELETE
     public boolean deleteObject (Objeto obj) throws SQLException {
         boolean result = false;
-        String select = "DELETE FROM objeto WHERE id='" + obj.getId() + "'";
         Statement st = Conectar.connection.createStatement();
-
-        ResultSet rs = st.executeQuery(select);
-        if (rs.next()) {
-            result=true;
+        try {
+            String delete = "DELETE FROM objeto WHERE id='" + obj.getId() + "'";
+            st.executeUpdate(delete);
+            result = true;
+        } catch (SQLException ex) {
+            throw new ExceptionDAO("No se ha podido borrar el objeto");
+        } finally {
+            st.close();
+            return result;
         }
-        rs.close();
-        st.close();
-
-        return result;
     }
     //UPDATES
         //son ejemplos debemos poner los que podemos hacer
@@ -155,35 +159,40 @@ public class ObjetoDAO {
     }
     public boolean sacarDeInventario (Usuario user, int idObjeto)throws SQLException{
         boolean result = false;
-        String select = "DELETE FROM inventario WHERE objeto='" + idObjeto + "', usuario='" + user.getNombre() +  "'";
         Statement st = Conectar.connection.createStatement();
-
-        ResultSet rs = st.executeQuery(select);
-        if (rs.next()) {
-            result=true;
+        try {
+            String delete = "DELETE FROM inventario WHERE objeto='" + idObjeto +  "'";
+            st.executeUpdate(delete);
+            result = true;
+        } catch (SQLException ex) {
+            throw new ExceptionDAO("No se ha podido borrar el objeto");
+        } finally {
+            st.close();
+            return result;
         }
-        rs.close();
-        st.close();
-
-        return result;
     }
-
 
     //montar inventario en una lista de objetos
 
     public List<Objeto> dameInventario (Usuario user) throws SQLException, ExceptionDAO{
+        Statement st = Conectar.connection.createStatement();
         String query = "SELECT objeto FROM inventario WHERE usuario='" + user.getNombre() + "'";
         List<Objeto> listaObjetos = new ArrayList<Objeto>();
-        Statement st = Conectar.connection.createStatement();
-
         ResultSet rs = st.executeQuery(query);
-        while(rs.next()){
-            listaObjetos.add(returnObject(rs.getInt("objeto")));
+        try {
+            while (rs.next()) {
+                listaObjetos.add(returnObject(rs.getInt("objeto")));
+            }
+        } catch (SQLException ex) {
+            throw new ExceptionDAO("No se ha podido borrar el objeto");
+        } finally {
+            rs.close();
+            st.close();
+            return listaObjetos;
         }
-        rs.close();
-        st.close();
 
-        return listaObjetos;
+
+
     }
 
     //dame un objeto de un usuario
