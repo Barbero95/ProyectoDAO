@@ -17,7 +17,7 @@ public class JSONService {
     protected Mundo mundo;
 
     public JSONService() {
-        //tracks = Singleton.getInstance().getTrack();
+
         mundo = Singleton.getInstance().getMundo();
 
         Usuario u = new Usuario("aa", "aaa",1,1,1,1);
