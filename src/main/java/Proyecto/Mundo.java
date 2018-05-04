@@ -131,7 +131,6 @@ public class Mundo {
         {
             usuarioList.add(user);
             return true;
-
         }
     }
     public boolean eliminarUsuario(String nombre) {

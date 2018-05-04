@@ -13,6 +13,7 @@ import retrofit2.http.*;
 import javax.ws.rs.POST;
 import javax.ws.rs.PathParam;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class App 
@@ -34,6 +35,41 @@ public class App
         }
     }
 
+    public static class Usuario{
+        public final String nombre;
+        public final String password;
+        public final int vida;
+        public final int ataque;
+        public final int defensa;
+        public final int resistencia;
+
+        public Usuario(String nombre, String password, int vida, int ataque, int defensa, int resistencia){
+            this.nombre = nombre;
+            this.password= password;
+            this.vida= vida;
+            this.ataque = ataque;
+            this.defensa= defensa;
+            this.resistencia=resistencia;
+        }
+    }
+    public static class Objeto{
+        public final int id;
+        public final String nombre;
+        public final String tipo;
+        public final String descripcion;
+        public final int valor;
+        public final int coste;
+
+        public Objeto( int id,String nombre, String tipo, String descripcion, int valor, int coste){
+            this.nombre = nombre;
+            this.descripcion= descripcion;
+            this.tipo= tipo;
+            this.id = id;
+            this.valor= valor;
+            this.coste=coste;
+        }
+    }
+
     public interface Rest {
         /*
         @GET("/repos/{owner}/{repo}/contributors")
@@ -43,14 +79,15 @@ public class App
         */
     }
     public interface ServiciosRetrofit {
-        @GET("/user/{id}")
-        Call<Usuario> consultarUsuario(@Path("id") String nombre);
+        @GET("/consultarUsuarioDAO/{user}")
+        Call<Usuario> consultarUsuario(@Path("user") String nombre);
 
-        @GET("/obj/{user}/{obj}")
-        Call<Objeto> consultarObjeto (@Path("user") String user,@Path("obj") String nomObj);
+        @GET("/consultarObjetoDAO/{obj}")
+        Call<Objeto> consultarObjeto (@Path("obj") int nomObj);
 
-        //@POST("/user")
-        //Call<Response> crearUser (@Body Usuario usuario);
+        @POST
+        @javax.ws.rs.Path("/login")
+        Call<Response> login (@Body ArrayList<String> lista);
 
     }
 
@@ -62,10 +99,10 @@ public class App
                 .baseUrl(API_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-
-        //Creamos un usuario
-        Usuario usuario = new Usuario();
-
+        //para el login
+        ArrayList<String > lista = new ArrayList<String>();
+        lista.add("David");
+        lista.add("xxx");
         // Create an instance of our GitHub API interface.
         Rest github = retrofit.create(Rest.class);
         ServiciosRetrofit servicios = retrofit.create(ServiciosRetrofit.class);
@@ -73,15 +110,23 @@ public class App
         // Create a call instance for looking up Retrofit contributors.
         //Call<List<Contributor>> call = github.contributors("RouteInjector", "route-injector");
         Call<Usuario> call1 = servicios.consultarUsuario("David");
-        Call<Objeto> call2 = servicios.consultarObjeto("David","espada");
-        //Call<Response> call3 = servicios.crearUser(usuario);
+        Call<Objeto> call2 = servicios.consultarObjeto(1);
+        Call<Response> call3 = servicios.login(lista);
 
         // Fetch and print a list of the contributors to the library.
         //List<Contributor> contributors = call.execute().body();
         Usuario user = call1.execute().body();
         Objeto obj = call2.execute().body();
-        //Response resp1 = call3.execute().body();
+        Response resp1 = call3.execute().body();
 
+        boolean resp =true;
+        if(resp){
+            System.out.println(user.nombre);
+            System.out.println(user.password);
+            System.out.println(user.ataque);
+            System.out.println(user.defensa);
+            System.out.println(user.resistencia);
+        }
         //for (Contributor contributor: contributors) {
         /*
         for (Follower follower : follow) {
