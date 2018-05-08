@@ -14,7 +14,7 @@ import java.net.URI;
  */
 public class MainRest {
     // Base URI the Grizzly HTTP server will listen on
-    public static final String BASE_URI = "http://localhost:8080/myapp/";
+    public static final String BASE_URI = "http://147.83.7.206:8080/myapp/";
 
     /**
      * Starts Grizzly HTTP server exposing JAX-RS resources defined in this application.
@@ -39,8 +39,8 @@ public class MainRest {
     public static void main(String[] args) throws IOException {
         final HttpServer server = startServer();
 
-        StaticHttpHandler staticHttpHandler = new StaticHttpHandler("./public/");
-        server.getServerConfiguration().addHttpHandler(staticHttpHandler, "/");
+        StaticHttpHandler staticHttpHandler = new StaticHttpHandler("./web/");
+        server.getServerConfiguration().addHttpHandler(staticHttpHandler,"/");
 
 
         System.out.println(String.format("Jersey app started with WADL available at "
