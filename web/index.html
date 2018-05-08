@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="css/estilos.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <!--<<script rel="stylesheet" href="js/funciones.js"></script>>-->
+
+    <script>
+
+        $( document ).ready(function() {
+                console.log("ready!");
+                var urlremote = "http://147.83.7.206:8080/myapp/json"
+                var urlhost = "http://localhost:8080/myapp/json"
+
+                $("#buttonLogin").click(function () {
+                    alert("Hola");
+                    $.ajax({
+                        url: 'http://localhost:8080/myapp/json/login',
+                        type: 'post',
+                        dataType: 'json',
+                        contentType:'application/json',
+                        success: function (data) {
+                            alert("Data: " + data + "\nStatus: " + status);
+                        },
+                        data: JSON.stringify({
+                            username: $("#username").val(),
+                            password: $("#password").val()
+                        })
+                    });
+                });
+        });
+      </script>
+
+
+  </head>
+    <body>
+    <!--
+      <nav class="navbar navbar-expand-lg navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">WebSiteName</a>
+          </div>
+        
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#"><span id="buttonLogin" class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            <li><a href="#"><span id="buttonSignup" class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          </ul>
+        </div>
+      </nav>
+      -->
+    <button id="buttonLogin" class="btn btn-primary">Log in</button>
+      <nav class="navbar navbar-dark bg-primary">
+          <form class="form-row">
+            <ul class="nav navbar-nav navbar-right">
+
+            </ul>
+          </form>
+      </nav>
+      
+      <section id="cover">
+       <div id="cover-texto">
+         <div class="container">
+            <div class="row">
+              <div class="col-sm-12">
+                <h1 class="display-3">Proyecto DSA 
+                </h1>
+                <p> Grupo formado por: David, Arnau y Ruben</p> 
+              <form>
+                <div class="form-row">
+                    <div class="col">
+                      <input id="username" type="text" class="form-control" placeholder="First name">
+                    </div>
+                  
+                    <div class="col">
+                      <input id="password" type="password" class="form-control" placeholder="Password">
+                    </div>
+                  <button id="buttonLogin2" class="btn btn-primary">Log in</button>
+                </div>
+                <button id="buttonSignup" class="btn btn-success">Sign up</button>
+              </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!--
+      <nav class="navbar navbar-expand-lg navbar-inverse">
+      </nav>
+
+
+    <section id="carrusel">
+      <div id="carousel-home" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#carousel-home" data-slide-to="0" class="active"></li>
+          <li data-target="#carousel-home" data-slide-to="1"></li>
+          <li data-target="#carousel-home" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img class="d-block w-100" src="img/wreath-842237_1920.jpg" alt="Niña paisaje">
+              <div class="carousel-caption">
+                <h3>Una niña y hermoso paisaje</h3>
+                <p>Fotografía profesional</p>
+              </div>
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-100" src="img/girl-548946_1920.jpg" alt="Camara">
+            <div class="carousel-caption">
+                <h3>Camara profesional</h3>
+                <p>Fotografía profesional</p>
+              </div>
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-100" src="img/woman-695451_1920.jpg" alt="Moto">
+            <div class="carousel-caption">
+                <h3>Mujer en una moto</h3>
+                <p>Fotografía profesional</p>
+              </div>
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#carousel-home" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Anterior</span>
+        </a>
+        <a class="carousel-control-next" href="#carousel-home" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Siguiente</span>
+        </a>
+      </div>
+    </section>
+
+    <section id="empresa">
+      <div class="contenido-seccion">
+        <div class="container">
+          <h2>Acerca de Render2web</h2>
+          <p class="lead">Render2Web Blog y Canal youtube especializados en enseñanza online en diferentes áreas como el diseño, desarrollo, programacion, visualización 3D y tecnología</p>
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="card">
+                  <div class="card-group">
+                    <div class="card">
+                      <div class="card-body">
+                        <h4 class="card-title">Fotografia Profesional</h4>
+                        <h6 class="card-subtitle">Subtitulo de tarjeta</h6>
+                      </div>
+                      <img class="card-img-top" src="img/camera-801924_1280.jpg" alt="Card image cap">
+                      <div class="card-body">
+                        <p class="card-text">Que camara mas bonita</p>
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Ver más</button>
+                      </div>
+                    </div>
+                    <div class="card">
+                      <div class="card-body">
+                        <h4 class="card-title">Diseño y Creatividad</h4>
+                        <h6 class="card-subtitle">Subtitulo de tarjeta</h6>
+                      </div>
+                      <img class="card-img-top" src="img/computer-2242262_1280.jpg" alt="escribiendo ideas">
+                      <div class="card-body">
+                        <p class="card-text">Ideas</p>
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Ver más</button>
+                      </div>
+                    </div>
+                    <div class="card">
+                      <div class="card-body">
+                        <h4 class="card-title">Programación</h4>
+                        <h6 class="card-subtitle">Subtitulo de tarjeta</h6>
+                      </div>
+                      <img class="card-img-top" src="img/computer-2076343_1280.jpg" alt="programación y sistemas TI">
+                      <div class="card-body">
+                        <p class="card-text">Que camara mas bonita</p>
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Ver más</button>
+                      </div>
+                    </div>
+                
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </section>
+
+    <footer id="footer-main">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-3">
+              <p>Creado por David Barbero</p>
+              <p>desarrollo <a href="https://www.render2web.com">Render2Web</a></p>
+            </div>
+            <div class="col-sm-3">
+              <ul class="list-unstyled">
+                <li><a href="">Inicio</a></li>
+                <li><a href="">Acerca de</a></li>
+                <li><a href="">Ultimas noticias</a></li>               
+              </ul>
+            </div>
+            <div class="col-sm-3">
+              <ul class="list-unstyled">
+                <li><a href="">Facebook</a></li>
+                <li><a href="">twitter</a></li>
+                <li><a href="">youtube</a></li>
+                <li><a href="">linkedin</a></li>                
+              </ul>
+            </div>
+            <div class="col-sm-3">
+              <h6>Info</h6>
+              <p>Lorem ipsum dolor sit amet, consectetur</p>
+            </div>
+          </div>
+        </div>
+    </footer>
+  -->
+
+    <script src="js/bootstrap.js"></script>
+  </body>
+</html>

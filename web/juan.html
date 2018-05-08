@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="css/estilos.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--<<script rel="stylesheet" href="js/funciones.js"></script>>-->
+
+    <script>
+        $(document).ready(function () {
+            console.log("ready!");
+
+            $("#btA").click(function () {
+                alert("Hola");
+                $.ajax({
+                    url: 'http://localhost:8080/myapp/json/login',
+                    type: 'post',
+                    dataType: 'json',
+                    contentType:'application/json',
+                    success: function (data) {
+                        alert("Data: " + data + "\nStatus: " + status);
+                    },
+                    data: JSON.stringify({
+                        username: $("#name").val(),
+                        password: $("#pass").val()
+                    })
+                });
+            });
+        });
+    </script>
+
+</head>
+<body>
+
+Nombre: <input id="name"></input><br>
+Password: <input id="pass"></input><br>
+<button id="btA">Send an HTTP POST request to a page and get the result back</button>
+
+<script src="js/bootstrap.js"></script>
+</body>
+</html>
