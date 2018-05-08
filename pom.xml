@@ -78,7 +78,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <mainClass>edu.upc.dsa.Main</mainClass>
+                    <mainClass>Rest.MainRest</mainClass>
                 </configuration>
             </plugin>
         </plugins>
