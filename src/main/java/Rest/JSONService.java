@@ -1,6 +1,7 @@
 package Rest;
 import DAOs.*;
 import Proyecto.*;
+import retrofit2.http.Body;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -69,10 +70,8 @@ public class JSONService {
     @POST
     @Path("/login")
     @Consumes (MediaType.APPLICATION_JSON)
-    public Response  login (ArrayList<String> lista) throws SQLException, ExceptionDAO {
-        String userName = lista.get(0);
-        String password = lista.get(1);
-        Usuario user = mundo.loginDAO(userName,password);
+    public Response  login (Login login) throws SQLException, ExceptionDAO {
+        Usuario user = mundo.loginDAO(login.getUsername(), login.getPassword());
         if (user==null){
             return Response.status(409).entity("User don't exist").build();
         }else{
