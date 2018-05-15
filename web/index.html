@@ -33,29 +33,27 @@
                         type: 'post',
                         dataType: 'json',
                         contentType:'application/json',
-                        success: function (data, status) {
-                            alert("Data: " + data + "\nStatus: " + status);
-                        },
                         data: JSON.stringify({
                             username: $("#username").val(),
                             password: $("#password").val()
-                        })
+                        }),
+                        success: function (data, status) {
+                            alert("Data: " + data + "\nStatus: " + status);
+                        },
                     });
                 });
 
             $("#buttonconsulta").click(function(){
                 alert("Hola pesicola");
                 $.ajax({
-                    url: 'http://localhost:8080/myapp/json/login',
+                    url: urlhost+'/consultarUsuarioDAO/' + $("#username").val(),
                     type: 'get',
                     dataType: 'json',
                     contentType:'application/json',
-                    success: function (data, status) {
-                        alert("Data: " + data + "\nStatus: " + status);
+                    success: function (Type, status) {
+                        alert("Data: " + Type + "\nStatus: " + status);
                     },
-                    data: JSON.stringify({
-                        username: $("#username").val()
-                    })
+
                 })
             });
 

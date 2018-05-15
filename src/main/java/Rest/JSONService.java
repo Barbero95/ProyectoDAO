@@ -28,14 +28,16 @@ public class JSONService {
     @GET
     @Path("/consultarUsuarioDAO/{user}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Usuario getInfoUsuario(@PathParam("user") String user) throws SQLException, ExceptionDAO {
-        return mundo.consultarUsuarioDAO(user);
+    public Response getInfoUsuario(@PathParam("user") String user) throws SQLException, ExceptionDAO {
+        Usuario u = mundo.consultarUsuarioDAO(user);
+        return Response.status(201).entity(u).build();
+
     }
     @GET
     @Path("/consultarObjetoDAO/{obj}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Objeto getInfoObjeto(@PathParam("obj") int obj) throws SQLException, ExceptionDAO {
-        return mundo.consultarObjetoDAO(obj);
+    public Response getInfoObjeto(@PathParam("obj") int obj) throws SQLException, ExceptionDAO {
+        return Response.status(201).entity(mundo.consultarObjetoDAO(obj)).build();
     }
     //le pasamos el nombre de usuario y el identificador del objeto
     @GET
