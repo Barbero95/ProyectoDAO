@@ -76,6 +76,25 @@ public class UsuarioDAO {
 
         return validar;
     }
+    public int validarNombre (String username) throws SQLException, ExceptionDAO {
+        int i = 0;
+        String select = "SELECT * FROM usuario WHERE username='" + username +"'";
+        Statement st = Conectar.connection.createStatement();
+        ResultSet rs = st.executeQuery(select);
+        try {
+
+            if (rs.next()) {
+                i = 1;
+            }
+
+        }catch (SQLException ex){
+            throw new ExceptionDAO("No existe el usuario");
+        }finally {
+            rs.close();
+            st.close();
+            return i;
+        }
+    }
     public Usuario returnUser(String username, String password) throws SQLException {
         Usuario user = new Usuario();
         String select = "SELECT * FROM usuario WHERE username='" + username + "' AND password='" + password + "'";
@@ -144,7 +163,6 @@ public class UsuarioDAO {
         boolean result = false;
         Statement st = Conectar.connection.createStatement();
         try {
-
             String delete = "DELETE FROM usuario WHERE username='" + user + "'";
             st.executeUpdate(delete);
             result = true;

@@ -72,12 +72,19 @@ public class JSONService {
     @POST
     @Path("/login")
     @Consumes (MediaType.APPLICATION_JSON)
-    public Response  login (Login login) throws SQLException, ExceptionDAO {
-        Usuario user = mundo.loginDAO(login.getUsername(), login.getPassword());
-        if (user==null){
-            return Response.status(409).entity("User don't exist").build();
+    public Response login (Login login) throws SQLException, ExceptionDAO {
+        //Usuario user = mundo.loginDAO(login.getUsername(), login.getPassword());
+        int i = mundo.loginDAO(login.getUsername(),login.getPassword());
+        //boolean x = mundo.loginDAO(login.getUsername(),login.getPassword());
+        if (i==1){
+            //login correct
+            i=1;
+            return Response.status(201).entity(i).build();
         }else{
-            return Response.status(201).entity("Login correct").build();
+            //user don't exist
+            //i=0 user don't exist
+            //i=2 contra no correcta
+            return Response.status(409).entity(i).build();
         }
     }
     @POST
@@ -86,9 +93,10 @@ public class JSONService {
     public Response newUserDAO(Usuario user) throws SQLException, ExceptionDAO {
         boolean result = mundo.crearUsuarioDAO(user);
         if(result) {
-            return Response.status(201).entity("User added correctly").build();
+            return Response.status(201).entity(result).build();
         } else {
-            return Response.status(409).entity("User already exists").build();
+            //"User already exists"
+            return Response.status(409).entity(result).build();
         }
     }
     @POST

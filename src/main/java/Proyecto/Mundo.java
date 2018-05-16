@@ -20,12 +20,35 @@ public class Mundo {
     public Mundo() {
 
     }
-    public Usuario loginDAO (String userName, String password)throws SQLException, ExceptionDAO{
+//    public Usuario loginDAO (String userName, String password)throws SQLException, ExceptionDAO{
+//        connect.conectar();
+//        Usuario usuario = userDao.returnUser(userName, password);
+//        connect.desconectar();
+//        return usuario;
+//    }
+    public int loginDAO (String userName, String password)throws SQLException, ExceptionDAO{
+        int resp=0;
         connect.conectar();
-        Usuario usuario = userDao.returnUser(userName, password);
+        int i = userDao.validarNombre(userName);
+        if (i==1){
+            boolean validar =userDao.validateUser(userName,password);
+            if(validar){
+                resp=1;
+            }else{
+                resp=2;
+            }
+        }else{
+            resp = 0;
+        }
         connect.desconectar();
-        return usuario;
+        return resp;
     }
+//    public boolean loginDAO (String userName, String password)throws SQLException, ExceptionDAO{
+//        connect.conectar();
+//        boolean resp = userDao.validateUser(userName, password);
+//        connect.desconectar();
+//        return resp;
+//    }
     public boolean crearObjetoDAO (Objeto obj)throws SQLException, ExceptionDAO{
         connect.conectar();
         boolean resp = objDAO.insertObject(obj);
