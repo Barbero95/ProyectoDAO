@@ -49,6 +49,10 @@ img {
 #footer-main {
     background: #222;
     color: white;
-    font-size: 0.8rem;
+    font-size: 1rem;
     padding: 2.5rem 0;
+}
+
+.separacionderecha{
+    margin-left: 3mm;
 }
