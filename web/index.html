@@ -28,7 +28,7 @@
 
             $("#buttonLogin").click(function () {
                 $.ajax({
-                    url: 'http://147.83.7.206:8080/myapp/json/login',
+                    url: 'http://localhost:8080/myapp/json/login',
                     type: 'post',
                     dataType: 'json',
                     contentType: 'application/json',
@@ -54,6 +54,22 @@
                     },
 
                 })
+            });
+
+            $("#buttonSignup").click(function () {
+                $.ajax({
+                    url: 'http://localhost:8080/myapp/json/newUser',
+                    type: 'post',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        username: $("#username").val(),
+                        password: $("#password").val()
+                    }),
+                    success: function (data, status) {
+                        alert("Data: " + data + "\nStatus: " + status);
+                    }
+                });
             });
 
         });
@@ -95,6 +111,41 @@
     </ol>
 </nav>
 -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Menu</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Estadisiticas</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Ranking
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Por Puntos</a>
+                    <a class="dropdown-item" href="#">Por cantidad de objetos</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#"></a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#">Disabled</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
+            <button class="btn btn-success my-2 my-sm-0" type="submit">Buscar</button>
+        </form>
+    </div>
+</nav>
 <!--
 <nav class="navbar navbar-dark bg-primary">
     <form class="form-row">
@@ -194,56 +245,55 @@
 <!--
 <section id="empresa">
 -->
-    <div class="contenido-seccion">
-        <div class="container">
-            <h2>Acerca del Proyecto</h2>
-            <p class="lead">Este proyecto ha sido realizado por alumnos de la UPC de Castelldefels, estudiantes de
-                Telematica, para la asignatura de DSA</p>
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="card">
-                        <div class="card-group">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h4 class="card-title">Android</h4>
-                                    <h6 class="card-subtitle">Subtitulo de tarjeta</h6>
-                                </div>
-                                <img class="card-img-top" src="img/5703171578_f03343265a_o-1920x1280-1.jpg"
-                                     alt="Card image cap">
-                                <div class="card-body">
-                                    <p class="card-text">Autor:...</p>
-                                    <button href="http://www.facebook.com" class="btn btn-primary" data-toggle="modal"
-                                            data-target="#myModal">Ver más
-                                    </button>
-                                    <a href="http://www.facebook.com" class="btn btn-primary-outline">Facebook </a>
-                                </div>
+<div class="contenido-seccion">
+    <div class="container">
+        <h2>Acerca del Proyecto</h2>
+        <p class="lead">Este proyecto ha sido realizado por alumnos de la UPC de Castelldefels, estudiantes de
+            Telematica, para la asignatura de DSA</p>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-group">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Android</h4>
+                                <h6 class="card-subtitle">Subtitulo de tarjeta</h6>
                             </div>
-                            <div class="card">
-                                <div class="card-body">
-                                    <h4 class="card-title">Diseño y Creatividad (WEB)</h4>
-                                    <h6 class="card-subtitle">Subtitulo de tarjeta</h6>
-                                </div>
-                                <img class="card-img-top"
-                                     src="img/marketing-online-abreviations-5-1236228-1920x1280.jpg"
-                                     alt="escribiendo ideas">
-                                <div class="card-body">
-                                    <p class="card-text">Autor:...</p>
-                                    <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Ver más
-                                    </button>
-                                </div>
+                            <img class="card-img-top" src="img/5703171578_f03343265a_o-1920x1280-1.jpg"
+                                 alt="Card image cap">
+                            <div class="card-body">
+                                <p class="card-text">Autor:...</p>
+                                <button href="http://www.facebook.com" class="btn btn-primary" data-toggle="modal"
+                                        data-target="#myModal">Ver más
+                                </button>
+                                <a href="http://www.facebook.com" class="btn btn-primary-outline">Facebook </a>
                             </div>
-                            <div class="card">
-                                <div class="card-body">
-                                    <h4 class="card-title">API</h4>
-                                    <h6 class="card-subtitle">Subtitulo de tarjeta</h6>
-                                </div>
-                                <img class="card-img-top" src="img/blogs-bootstrap-4.jpg"
-                                     alt="programación y sistemas TI">
-                                <div class="card-body">
-                                    <p class="card-text">Autor:...</p>
-                                    <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Ver más
-                                    </button>
-                                </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Diseño y Creatividad (WEB)</h4>
+                                <h6 class="card-subtitle">Subtitulo de tarjeta</h6>
+                            </div>
+                            <img class="card-img-top"
+                                 src="img/marketing-online-abreviations-5-1236228-1920x1280.jpg"
+                                 alt="escribiendo ideas">
+                            <div class="card-body">
+                                <p class="card-text">Autor:...</p>
+                                <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Ver más
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">API</h4>
+                                <h6 class="card-subtitle">Subtitulo de tarjeta</h6>
+                            </div>
+                            <img class="card-img-top" src="img/blogs-bootstrap-4.jpg"
+                                 alt="programación y sistemas TI">
+                            <div class="card-body">
+                                <p class="card-text">Autor:...</p>
+                                <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Ver más
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -251,7 +301,8 @@
             </div>
         </div>
     </div>
-    <!--
+</div>
+<!--
 </section>
 -->
 <section id="acerca-de">
