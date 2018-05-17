@@ -17,7 +17,8 @@ public class UsuarioDAO {
     public boolean insertUser(Usuario u) throws SQLException, ExceptionDAO {
         boolean resp = false;
         if (existUser(u)) {
-            throw new ExceptionDAO("Usuario ya existe");
+            return resp;
+            //throw new ExceptionDAO("Usuario ya existe");
         } else {
             String query = "INSERT INTO usuario VALUES (?,?,?,?,?,?)";
             PreparedStatement ps = Conectar.connection.prepareStatement(query);
@@ -62,57 +63,31 @@ public class UsuarioDAO {
     }
 
     //SELECTS
-    public boolean validateUser(String username, String password) throws SQLException {
-        boolean validar = false;
+    private boolean validateUser(String username, String password) throws SQLException {
         String select = "SELECT * FROM usuario WHERE username='" + username + "' AND password='" + password + "'";
         Statement st = Conectar.connection.createStatement();
-
+        boolean exist = false;
         ResultSet rs = st.executeQuery(select);
         if (rs.next()) {
-            validar = true;
+            exist = true;
         }
         rs.close();
         st.close();
-
-        return validar;
+        return exist;
     }
-    public int validarNombre (String username) throws SQLException, ExceptionDAO {
-        int i = 0;
-        String select = "SELECT * FROM usuario WHERE username='" + username +"'";
-        Statement st = Conectar.connection.createStatement();
-        ResultSet rs = st.executeQuery(select);
-        try {
-
-            if (rs.next()) {
-                i = 1;
+    public int validar (String username, String password) throws SQLException, ExceptionDAO {
+        Usuario u = new Usuario(username,password,0,0,0,0);
+        int result;
+        if(existUser(u)){
+            if(validateUser(username,password)){
+                result = 1;
+            }else{
+                result = 2;
             }
-
-        }catch (SQLException ex){
-            throw new ExceptionDAO("No existe el usuario");
-        }finally {
-            rs.close();
-            st.close();
-            return i;
+        } else{
+            result = 0;
         }
-    }
-    public Usuario returnUser(String username, String password) throws SQLException {
-        Usuario user = new Usuario();
-        String select = "SELECT * FROM usuario WHERE username='" + username + "' AND password='" + password + "'";
-        Statement st = Conectar.connection.createStatement();
-
-        ResultSet rs = st.executeQuery(select);
-        if (rs.next()) {
-            user.setNombre(rs.getString("username"));
-            user.setPassword(rs.getString("password"));
-            user.setVida(rs.getInt("vida"));
-            user.setAtaque(rs.getInt("ataque"));
-            user.setDefensa(rs.getInt("defensa"));
-            user.setResistencia(rs.getInt("resistencia"));
-        }
-        rs.close();
-        st.close();
-
-        return user;
+        return result;
     }
     //solo con el nombre
     public Usuario infoUser(String username) throws SQLException {

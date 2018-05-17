@@ -20,9 +20,10 @@ public class ObjetoDAO {
 
     //INSERTS
     public boolean insertObject(Objeto obj) throws SQLException, ExceptionDAO {
-        boolean resp = false;
+        boolean resp;
         if (existObjct(obj)) {
-            throw new ExceptionDAO("Ya existe el objeto");
+            return false;
+            //throw new ExceptionDAO("Ya existe el objeto");
         } else {
             String query = "INSERT INTO objeto VALUES (NULL,?,?,?,?,?)";
             PreparedStatement ps = Conectar.connection.prepareStatement(query);

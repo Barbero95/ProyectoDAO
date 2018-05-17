@@ -72,20 +72,25 @@ public class JSONService {
     @POST
     @Path("/login")
     @Consumes (MediaType.APPLICATION_JSON)
-    public Response login (Login login) throws SQLException, ExceptionDAO {
+    public Response login (Login log) throws SQLException, ExceptionDAO {
         //Usuario user = mundo.loginDAO(login.getUsername(), login.getPassword());
-        int i = mundo.loginDAO(login.getUsername(),login.getPassword());
-        //boolean x = mundo.loginDAO(login.getUsername(),login.getPassword());
-        if (i==1){
+        //int i = mundo.loginDAO(login.getUsername(),login.getPassword());
+        int result = mundo.loginDAO(log);
+        if (result==1){
             //login correct
-            i=1;
-            return Response.status(201).entity(i).build();
+            result=1;
+            return Response.status(201).entity(result).build();
         }else{
             //user don't exist
             //i=0 user don't exist
             //i=2 contra no correcta
-            return Response.status(409).entity(i).build();
+            return Response.status(409).entity(result).build();
         }
+//        if(x){
+//            return Response.status(201).entity(x).build();
+//        } else{
+//            return Response.status(409).entity(x).build();
+//        }
     }
     @POST
     @Path("/newUser")

@@ -20,32 +20,54 @@ public class Mundo {
     public Mundo() {
 
     }
+    public int loginDAO (Login log)throws SQLException, ExceptionDAO{
+        String userName = log.getUsername();
+        String password = log.getPassword();
+        connect.conectar();
+        int result = userDao.validar(userName, password);
+        connect.desconectar();
+        return result;
+    }
 //    public Usuario loginDAO (String userName, String password)throws SQLException, ExceptionDAO{
 //        connect.conectar();
 //        Usuario usuario = userDao.returnUser(userName, password);
 //        connect.desconectar();
 //        return usuario;
 //    }
-    public int loginDAO (String userName, String password)throws SQLException, ExceptionDAO{
-        int resp=0;
-        connect.conectar();
-        int i = userDao.validarNombre(userName);
-        if (i==1){
-            boolean validar =userDao.validateUser(userName,password);
-            if(validar){
-                resp=1;
-            }else{
-                resp=2;
-            }
-        }else{
-            resp = 0;
-        }
-        connect.desconectar();
-        return resp;
-    }
-//    public boolean loginDAO (String userName, String password)throws SQLException, ExceptionDAO{
+//    public int loginDAO (String userName, String password)throws SQLException, ExceptionDAO{
+//        int resp=0;
 //        connect.conectar();
-//        boolean resp = userDao.validateUser(userName, password);
+//        int i = userDao.validarNombre(userName);
+//        if (i==1){
+//            boolean validar =userDao.validateUser(userName,password);
+//            if(validar){
+//                resp=1;
+//            }else{
+//                resp=2;
+//            }
+//        }else{
+//            resp = 0;
+//        }
+//        connect.desconectar();
+//        return resp;
+//    }
+//    public boolean loginDAO (Login login)throws SQLException, ExceptionDAO{
+//        String userName = login.getUsername();
+//        String password = login.getPassword();
+//        boolean validate;
+//        connect.conectar();
+//        boolean resp = userDao.validarNombre(userName);
+//        if (resp) {
+//            Usuario user =userDao.infoUser(userName);
+//            if (password.equals(user.getPassword())){
+//                validate = true;
+//            } else{
+//                validate = false;
+//            }
+//        }else{
+//                validate = false;
+//        }
+//
 //        connect.desconectar();
 //        return resp;
 //    }
