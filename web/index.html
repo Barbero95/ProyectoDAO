@@ -29,7 +29,7 @@
 
             $("#buttonLogin").click(function () {
                 $.ajax({
-                    url: 'http://localhost:8080/myapp/json/login',
+                    url: 'http://147.83.7.206:8080/myapp/json/login',
                     type: 'post',
                     dataType: 'json',
                     contentType: 'application/json',
@@ -40,7 +40,7 @@
                     success: function (data, status) {
                         alert("Data: " + data + "\nStatus: " + status);
                         getUsuario();
-                        window.location.assign("http://localhost:8080/juan.html");
+                        window.location.assign("http://147.83.7.206:8080/juan.html");
                     }
                 });
             });
@@ -59,7 +59,7 @@
             });
             function getUsuario() {
                 $.ajax({
-                    url: 'http://localhost:8080/myapp/json/consultarUser',
+                    url: 'http://147.83.7.206:8080/myapp/json/consultarUser',
                     type: 'post',
                     dataType: 'json',
                     contentType: 'application/json',
@@ -87,7 +87,7 @@
             }
             $("#buttonSignup").click(function () {
                 $.ajax({
-                    url: 'http://localhost:8080/myapp/json/newUser',
+                    url: 'http://147.83.7.206:8080/myapp/json/newUser',
                     type: 'post',
                     dataType: 'json',
                     contentType: 'application/json',

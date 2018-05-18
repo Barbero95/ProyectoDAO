@@ -19,13 +19,13 @@ public class Conectar {
 //        String user = "root";
 //        String pass = "david";
 
-//        String url = I18NManager.getInstance().getText("serverLinux", "T1");
-//        String user = I18NManager.getInstance().getText("serverLinux", "T2");
-//        String pass = I18NManager.getInstance().getText("serverLinux", "T3");
+        String url = I18NManager.getInstance().getText("serverLinux", "T1");
+        String user = I18NManager.getInstance().getText("serverLinux", "T2");
+        String pass = I18NManager.getInstance().getText("serverLinux", "T3");
 
-        String url = I18NManager.getInstance().getText("local", "T1");
-        String user = I18NManager.getInstance().getText("local", "T2");
-        String pass = I18NManager.getInstance().getText("local", "T3");
+//        String url = I18NManager.getInstance().getText("local", "T1");
+//        String user = I18NManager.getInstance().getText("local", "T2");
+//        String pass = I18NManager.getInstance().getText("local", "T3");
 
         connection = DriverManager.getConnection(url, user, pass);
     }
