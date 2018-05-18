@@ -40,19 +40,10 @@ public class UsuarioDAO {
     }
 
     //UPDATES
-    /**
-     * Dado un usuario i un nombre de usuario antiguo se modifica la contraseña
-     * i el nombre del usuario
-     *
-     * @param username nombre del usuario guardado en la bbdd
-     * @param acctUser usuario modificado
-     * @throws SQLException
-     * @throws ExceptionDAO
-     */
-    public void modificarUsuario(String username, Usuario acctUser) throws SQLException, ExceptionDAO {
+    public void modificarAtaque(String username, String ataque) throws SQLException, ExceptionDAO {
         Statement st = Conectar.connection.createStatement();
         try {
-            String updateExp = "update usuario set password='" + acctUser.getPassword() + "', username='" + acctUser.getNombre() + "' where username='" + username + "'";
+            String updateExp = "update usuario set ataque='" + ataque + "' where username='" + username + "'";
             st.executeUpdate(updateExp);
 
         } catch (SQLException ex) {
@@ -61,7 +52,31 @@ public class UsuarioDAO {
             st.close();
         }
     }
-    public void modDinero (String username, int moneyNow) throws SQLException, ExceptionDAO{
+    public void modificarDefensa(String username, String defensa) throws SQLException, ExceptionDAO {
+        Statement st = Conectar.connection.createStatement();
+        try {
+            String updateExp = "update usuario set defensa='" + defensa + "' where username='" + username + "'";
+            st.executeUpdate(updateExp);
+
+        } catch (SQLException ex) {
+            throw new ExceptionDAO("No se ha podido modificar el usuario");
+        } finally {
+            st.close();
+        }
+    }
+    public void modificarResistencia(String username, String resistencia) throws SQLException, ExceptionDAO {
+        Statement st = Conectar.connection.createStatement();
+        try {
+            String updateExp = "update usuario set resistencia='" + resistencia + "' where username='" + username + "'";
+            st.executeUpdate(updateExp);
+
+        } catch (SQLException ex) {
+            throw new ExceptionDAO("No se ha podido modificar el usuario");
+        } finally {
+            st.close();
+        }
+    }
+    public void modificarDinero (String username, int moneyNow) throws SQLException, ExceptionDAO{
         Statement st = Conectar.connection.createStatement();
         try {
             String updateExp = "update usuario set money='" + moneyNow + "' where username='" + username + "'";

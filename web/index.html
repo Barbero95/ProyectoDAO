@@ -18,18 +18,19 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!--<<script rel="stylesheet" href="js/funciones.js"></script>>-->
-
+    <!--
+    var url = "http://147.83.7.206:8080/myapp/json"
+    var url = "http://localhost:8080/myapp/json"
+    -->
     <script>
 
         $(document).ready(function () {
             console.log("ready!");
-            var urlremote = "http://147.83.7.206:8080/myapp/json"
-            var urlhost = "http://localhost:8080/myapp/json"
-
-
+            var urlRest = 'http://147.83.7.206:8080/myapp/json';
+            var urlRest2 = "http://147.83.7.206:8080";
             $("#buttonLogin").click(function () {
                 $.ajax({
-                    url: 'http://localhost:8080/myapp/json/login',
+                    url: urlRest + '/login',
                     type: 'post',
                     dataType: 'json',
                     contentType: 'application/json',
@@ -39,8 +40,8 @@
                     }),
                     success: function (data, status) {
                         alert("Data: " + data + "\nStatus: " + status);
-                        getUsuario();
-                        window.location.assign("http://localhost:8080/juan.html");
+
+                        window.location.assign(urlRest2+"/juan.html");
                     }
                 });
             });
@@ -59,7 +60,7 @@
             });
             function getUsuario() {
                 $.ajax({
-                    url: 'http://localhost:8080/myapp/json/consultarUser',
+                    url: urlRest + '/consultarUser',
                     type: 'post',
                     dataType: 'json',
                     contentType: 'application/json',
@@ -87,7 +88,7 @@
             }
             $("#buttonSignup").click(function () {
                 $.ajax({
-                    url: 'http://localhost:8080/myapp/json/newUser',
+                    url: urlRest +'/newUser',
                     type: 'post',
                     dataType: 'json',
                     contentType: 'application/json',
