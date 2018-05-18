@@ -113,9 +113,9 @@ public class JSONService {
     public Response newObjectDAO(Objeto obj) throws SQLException, ExceptionDAO {
         boolean result = mundo.crearObjetoDAO(obj);
         if(result) {
-            return Response.status(201).entity("Object added correctly").build();
+            return Response.status(201).entity(result).build();
         } else {
-            return Response.status(409).entity("Object already exists").build();
+            return Response.status(409).entity(result).build();
         }
     }
 

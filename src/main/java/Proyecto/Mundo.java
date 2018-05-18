@@ -35,9 +35,9 @@ public class Mundo {
     public boolean crearObjetoDAO (Objeto obj)throws SQLException, ExceptionDAO{
         connect.conectar();
         boolean resp = objDAO.insertObject(obj);
-         int idObj = objDAO.darElIdentificador(obj.getNombre());
+        int idObj = objDAO.darElIdentificador(obj.getNombre());
         obj.setId(idObj);
-        String r= String.valueOf(idObj);
+        String r = String.valueOf(idObj);
         mapaObjetos.put(r,obj);
         connect.desconectar();
         return resp;

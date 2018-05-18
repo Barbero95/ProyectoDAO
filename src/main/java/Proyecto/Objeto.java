@@ -4,30 +4,30 @@ public class Objeto {
 
     private int id;
 
-    private String Nombre;
+    private String nombre;
 
-    private String Tipo;
+    private String tipo;
 
-    private String Descripcion;
+    private String descripcion;
 
-    private int Valor;
+    private int valor;
 
-    private int Coste;
+    private int coste;
 
     public Objeto() {
     }
 
     public Objeto(String nombre, String tipo, String descripcion, int valor, int coste) {
 
-        this.Nombre = nombre;
+        this.nombre = nombre;
 
-        this.Tipo = tipo;
+        this.tipo = tipo;
 
-        this.Descripcion = descripcion;
+        this.descripcion = descripcion;
 
-        this.Valor = valor;
+        this.valor = valor;
 
-        this.Coste = coste;
+        this.coste = coste;
 
 
 
@@ -44,43 +44,43 @@ public class Objeto {
     }
 
     public String getNombre() {
-        return Nombre;
+        return nombre;
     }
 
     public void setNombre(String nombre) {
-        Nombre = nombre;
+        this.nombre = nombre;
     }
 
     public String getTipo() {
-        return Tipo;
+        return tipo;
     }
 
     public void setTipo(String tipo) {
-        Tipo = tipo;
+        this.tipo = tipo;
     }
 
     public String getDescripcion() {
-        return Descripcion;
+        return descripcion;
     }
 
     public void setDescripcion(String descripcion) {
-        Descripcion = descripcion;
+        this.descripcion = descripcion;
     }
 
     public int getValor() {
-        return Valor;
+        return valor;
     }
 
     public void setValor(int valor) {
-        Valor = valor;
+        this.valor = valor;
     }
 
     public int getCoste() {
-        return Coste;
+        return coste;
     }
 
     public void setCoste(int coste) {
-        Coste = coste;
+        this.coste = coste;
     }
 
     public int getId() { return id; }
