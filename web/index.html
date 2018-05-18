@@ -26,6 +26,7 @@
             var urlremote = "http://147.83.7.206:8080/myapp/json"
             var urlhost = "http://localhost:8080/myapp/json"
 
+
             $("#buttonLogin").click(function () {
                 $.ajax({
                     url: 'http://localhost:8080/myapp/json/login',
@@ -38,10 +39,12 @@
                     }),
                     success: function (data, status) {
                         alert("Data: " + data + "\nStatus: " + status);
+                        getUsuario();
+                        window.location.assign("http://localhost:8080/juan.html");
                     }
                 });
             });
-
+            <!-- Latest compiled JavaScript -->
             $("#buttonconsulta").click(function () {
                 alert("Hola pesicola");
                 $.ajax({
@@ -49,13 +52,39 @@
                     type: 'get',
                     dataType: 'json',
                     contentType: 'application/json',
-                    success: function (Type, status) {
-                        alert("Data: " + Type + "\nStatus: " + status);
+                    success: function (data, status) {
+                        alert("Data: " + data + "\nStatus: " + status);
                     },
-
                 })
             });
-
+            function getUsuario() {
+                $.ajax({
+                    url: 'http://localhost:8080/myapp/json/consultarUser',
+                    type: 'post',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        username: $("#username").val(),
+                        password: $("#password").val()
+                    }),
+                    success: function (data) {
+                        var jsonObj = JSON.parse(data);
+                        var user = jsonObj.nombre;
+                        var vida = jsonObj.vida;
+                        var ataque = jsonObj.ataque;
+                        var defensa = jsonObj.defensa;
+                        var resistencia = jsonObj.resistencia;
+                        var money = jsonObj.money;
+                        sessionStorage.setItem("user",user);
+                        sessionStorage.setItem("vida",vida);
+                        sessionStorage.setItem("ataque",ataque);
+                        sessionStorage.setItem("defensa",defensa);
+                        sessionStorage.setItem("resistencia",resistencia);
+                        sessionStorage.setItem("money",money);
+                        alert("Usuario: " + user + "\nVida:"+ vida+ "\nmoney:"+money);
+                    }
+                });
+            }
             $("#buttonSignup").click(function () {
                 $.ajax({
                     url: 'http://localhost:8080/myapp/json/newUser',
@@ -63,8 +92,13 @@
                     dataType: 'json',
                     contentType: 'application/json',
                     data: JSON.stringify({
-                        username: $("#username").val(),
-                        password: $("#password").val()
+                        nombre: $("#username").val(),
+                        password: $("#password").val(),
+                        vida: 100,
+                        ataque: 0,
+                        defensa: 0,
+                        resistencia:0,
+                        money: 1000
                     }),
                     success: function (data, status) {
                         alert("Data: " + data + "\nStatus: " + status);

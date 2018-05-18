@@ -20,7 +20,7 @@ public class UsuarioDAO {
             return resp;
             //throw new ExceptionDAO("Usuario ya existe");
         } else {
-            String query = "INSERT INTO usuario VALUES (?,?,?,?,?,?)";
+            String query = "INSERT INTO usuario VALUES (?,?,?,?,?,?,?)";
             PreparedStatement ps = Conectar.connection.prepareStatement(query);
 
             ps.setString(1, u.getNombre());
@@ -29,6 +29,7 @@ public class UsuarioDAO {
             ps.setInt(4, u.getAtaque());
             ps.setInt(5, u.getDefensa());
             ps.setInt(6, u.getResistencia());
+            ps.setInt(7, u.getMoney());
 
             ps.executeUpdate();
             ps.close();
@@ -51,8 +52,19 @@ public class UsuarioDAO {
     public void modificarUsuario(String username, Usuario acctUser) throws SQLException, ExceptionDAO {
         Statement st = Conectar.connection.createStatement();
         try {
+            String updateExp = "update usuario set password='" + acctUser.getPassword() + "', username='" + acctUser.getNombre() + "' where username='" + username + "'";
+            st.executeUpdate(updateExp);
 
-            String updateExp = "update stucomcrossing.user set password='" + acctUser.getPassword() + "', username='" + acctUser.getNombre() + "' where username='" + username + "'";
+        } catch (SQLException ex) {
+            throw new ExceptionDAO("No se ha podido modificar el usuario");
+        } finally {
+            st.close();
+        }
+    }
+    public void modDinero (String username, int moneyNow) throws SQLException, ExceptionDAO{
+        Statement st = Conectar.connection.createStatement();
+        try {
+            String updateExp = "update usuario set money='" + moneyNow + "' where username='" + username + "'";
             st.executeUpdate(updateExp);
 
         } catch (SQLException ex) {
@@ -63,31 +75,17 @@ public class UsuarioDAO {
     }
 
     //SELECTS
-    private boolean validateUser(String username, String password) throws SQLException {
+    public boolean validateUser(String username, String password) throws SQLException {
         String select = "SELECT * FROM usuario WHERE username='" + username + "' AND password='" + password + "'";
         Statement st = Conectar.connection.createStatement();
         boolean exist = false;
         ResultSet rs = st.executeQuery(select);
         if (rs.next()) {
-            exist = true;
+            return true;
         }
         rs.close();
         st.close();
         return exist;
-    }
-    public int validar (String username, String password) throws SQLException, ExceptionDAO {
-        Usuario u = new Usuario(username,password,0,0,0,0);
-        int result;
-        if(existUser(u)){
-            if(validateUser(username,password)){
-                result = 1;
-            }else{
-                result = 2;
-            }
-        } else{
-            result = 0;
-        }
-        return result;
     }
     //solo con el nombre
     public Usuario infoUser(String username) throws SQLException {
@@ -103,15 +101,13 @@ public class UsuarioDAO {
             user.setAtaque(rs.getInt("ataque"));
             user.setDefensa(rs.getInt("defensa"));
             user.setResistencia(rs.getInt("resistencia"));
+            user.setMoney(rs.getInt("money"));
         }
         rs.close();
         st.close();
 
         return user;
     }
-
-
-
 
     /**
      * Funcion que comprueva si un usuario existe en la base de datos

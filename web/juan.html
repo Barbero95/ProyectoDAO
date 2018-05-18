@@ -22,6 +22,10 @@
     <script>
         $(document).ready(function () {
             console.log("ready!");
+            var user = sessionStorage.getItem("user");
+            var money = sessionStorage.getItem("money");
+            alert("Usuario: " + user + "\nMoney: " + money);
+            document.getElementById("mon").innerHTML = money;
 
             $("#btA").click(function () {
                 alert("Hola");
@@ -44,9 +48,10 @@
 
 </head>
 <body>
-
+var mon:
 Nombre: <input id="name"></input><br>
 Password: <input id="pass"></input><br>
+Money: <input id="mon" type="text" size="15" maxlength="30"></input><br>
 <button id="btA">Send an HTTP POST request to a page and get the result back</button>
 
 <script src="js/bootstrap.js"></script>

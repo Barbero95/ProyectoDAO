@@ -11,18 +11,20 @@ public class Usuario {
     private int ataque;
     private int defensa;
     private int resistencia;
+    private int money;
     private List<Objeto> objetoList = new LinkedList<Objeto>();
 
     public Usuario() {
     }
 
-    public Usuario(String nombre, String password, int vida, int ataque, int defensa, int resistencia){
+    public Usuario(String nombre, String password, int vida, int ataque, int defensa, int resistencia, int money){
         this.nombre = nombre;
         this.password = password;
         this.vida = vida;
         this.ataque = ataque;
         this.defensa = defensa;
         this.resistencia = resistencia;
+        this.money = money;
     }
 
     public void mostrarPorPantala() {
@@ -82,6 +84,14 @@ public class Usuario {
 
     public void setResistencia(int resistencia) {
         this.resistencia = resistencia;
+    }
+
+    public int getMoney() {
+        return money;
+    }
+
+    public void setMoney(int money) {
+        this.money = money;
     }
 
     public List<Objeto> getObjetoList() {

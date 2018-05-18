@@ -14,7 +14,7 @@ public class MainDao {
         ObjetoDAO objDAO = new ObjetoDAO();
         Usuario user;
         Objeto obj;
-        user = new Usuario("Pitufo2","x",1,1,1,1);
+        user = new Usuario("Pitufo2","x",1,1,1,1,100);
         obj = new Objeto("espada","fuego","esta espada esta muy rota",1,1);
         List<Objeto> listaObjetos;
         try {
@@ -22,14 +22,14 @@ public class MainDao {
             //funciona
             //mundo.crearUsuarioDAO(user);
             //funciona
-            //mundo.eliminarUsuarioDAO(user);
+            mundo.eliminarUsuarioDAO(user.getNombre());
             //int modiId = objDAO.darElIdentificador(obj.getNombre());
             //obj.setId(modiId);
             //funciona
             //mundo.crearObjetoDAO(obj);
 
-            listaObjetos = new ArrayList<>(mundo.getListaObjetosUsuario(user.getNombre()));
-            System.out.println("1 objeto  " + listaObjetos.get(0));
+//            listaObjetos = new ArrayList<>(mundo.getListaObjetosUsuario(user.getNombre()));
+//            System.out.println("1 objeto  " + listaObjetos.get(0));
             //mundo.añadirObjetoAUsuarioDAO(user,obj);
             //mundo.eliminarObjetosDeUsuarioDAO(user,1);
             //System.out.println("id objeto" + obj.getId());

@@ -1,6 +1,7 @@
 package Rest;
 import DAOs.*;
 import Proyecto.*;
+import com.google.gson.JsonObject;
 import retrofit2.http.Body;
 
 import javax.ws.rs.*;
@@ -18,12 +19,7 @@ public class JSONService {
     protected Mundo mundo;
 
     public JSONService() {
-
         mundo = Singleton.getInstance().getMundo();
-
-        Usuario u = new Usuario("aa", "aaa",1,1,1,1);
-        mundo.crearUsuario(u);
-
     }
     @GET
     @Path("/consultarUsuarioDAO/{user}")
@@ -39,6 +35,7 @@ public class JSONService {
     public Response getInfoObjeto(@PathParam("obj") int obj) throws SQLException, ExceptionDAO {
         return Response.status(201).entity(mundo.consultarObjetoDAO(obj)).build();
     }
+
     //le pasamos el nombre de usuario y el identificador del objeto
     @GET
     @Path("/infoObjeto/{user}/{obj}")
@@ -73,24 +70,29 @@ public class JSONService {
     @Path("/login")
     @Consumes (MediaType.APPLICATION_JSON)
     public Response login (Login log) throws SQLException, ExceptionDAO {
-        //Usuario user = mundo.loginDAO(login.getUsername(), login.getPassword());
-        //int i = mundo.loginDAO(login.getUsername(),login.getPassword());
-        int result = mundo.loginDAO(log);
-        if (result==1){
+        boolean result = mundo.loginDAO(log);
+        //RespLog resp = mundo.resp(log.getUsername());
+        if (result){
             //login correct
-            result=1;
+
             return Response.status(201).entity(result).build();
         }else{
             //user don't exist
-            //i=0 user don't exist
-            //i=2 contra no correcta
+            result = false;
             return Response.status(409).entity(result).build();
         }
-//        if(x){
-//            return Response.status(201).entity(x).build();
-//        } else{
-//            return Response.status(409).entity(x).build();
-//        }
+    }
+    @POST
+    @Path("/consultarUser")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response consultaInfoUser (Login name) throws SQLException, ExceptionDAO {
+        Usuario u = mundo.consultarUsuarioDAO(name.getUsername());
+        if (u == null) {
+            return Response.status(409).entity(u).build();
+        } else {
+            u.setPassword("0");
+            return Response.status(201).entity(u).build();
+        }
     }
     @POST
     @Path("/newUser")
@@ -101,6 +103,7 @@ public class JSONService {
             return Response.status(201).entity(result).build();
         } else {
             //"User already exists"
+            result = false;
             return Response.status(409).entity(result).build();
         }
     }

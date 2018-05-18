@@ -47,6 +47,7 @@ public class MainBasico {
                     int ataque = 0;
                     int defensa = 0;
                     int resistencia = 0;
+                    int money = 1000;
                     while (true) {
                         try {
                             System.out.print("Vida: ");
@@ -66,7 +67,7 @@ public class MainBasico {
                             e.printStackTrace();
                         }
                     }
-                    Usuario u = new Usuario(nombre, passwordd, Vida, ataque, defensa, resistencia);
+                    Usuario u = new Usuario(nombre, passwordd, Vida, ataque, defensa, resistencia,money);
                     if (mun.crearUsuario(u) != false)
                         System.out.println("Usuario añadido.");
                     else

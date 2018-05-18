@@ -1,6 +1,7 @@
 package Proyecto;
 
 import DAOs.*;
+import com.google.gson.internal.bind.SqlDateTypeAdapter;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -20,57 +21,17 @@ public class Mundo {
     public Mundo() {
 
     }
-    public int loginDAO (Login log)throws SQLException, ExceptionDAO{
-        String userName = log.getUsername();
-        String password = log.getPassword();
+    public boolean loginDAO (Login log)throws SQLException, ExceptionDAO{
         connect.conectar();
-        int result = userDao.validar(userName, password);
+        boolean result = userDao.validateUser(log.getUsername(), log.getPassword());
         connect.desconectar();
         return result;
     }
-//    public Usuario loginDAO (String userName, String password)throws SQLException, ExceptionDAO{
-//        connect.conectar();
-//        Usuario usuario = userDao.returnUser(userName, password);
-//        connect.desconectar();
-//        return usuario;
-//    }
-//    public int loginDAO (String userName, String password)throws SQLException, ExceptionDAO{
-//        int resp=0;
-//        connect.conectar();
-//        int i = userDao.validarNombre(userName);
-//        if (i==1){
-//            boolean validar =userDao.validateUser(userName,password);
-//            if(validar){
-//                resp=1;
-//            }else{
-//                resp=2;
-//            }
-//        }else{
-//            resp = 0;
-//        }
-//        connect.desconectar();
-//        return resp;
-//    }
-//    public boolean loginDAO (Login login)throws SQLException, ExceptionDAO{
-//        String userName = login.getUsername();
-//        String password = login.getPassword();
-//        boolean validate;
-//        connect.conectar();
-//        boolean resp = userDao.validarNombre(userName);
-//        if (resp) {
-//            Usuario user =userDao.infoUser(userName);
-//            if (password.equals(user.getPassword())){
-//                validate = true;
-//            } else{
-//                validate = false;
-//            }
-//        }else{
-//                validate = false;
-//        }
-//
-//        connect.desconectar();
-//        return resp;
-//    }
+    public RespLog resp (String username) throws SQLException, ExceptionDAO {
+        Usuario u = consultarUsuarioDAO(username);
+        RespLog respLog = new RespLog(u.getNombre(),u.getMoney());
+        return respLog;
+    }
     public boolean crearObjetoDAO (Objeto obj)throws SQLException, ExceptionDAO{
         connect.conectar();
         boolean resp = objDAO.insertObject(obj);
