@@ -28,8 +28,8 @@
             console.log("ready!");
             var urlRest = 'http://147.83.7.206:8080/myapp/json';
             var urlRest2 = "http://147.83.7.206:8080";
-            var url = "http://localhost:8080/myapp/json";
-            var url2 = "http://localhost:8080";
+            var url = 'http://localhost:8080/myapp/json';
+            var url2 = 'http://localhost:8080';
 
             $("#buttonLogin").click(function () {
                 $.ajax({
@@ -45,7 +45,7 @@
                     success: function (data, status) {
                         alert("Data: " + data + "\nStatus: " + status);
                         getUsuario();
-                        window.location.assign(url2+"/juan.html");
+                        window.location.assign(url2+'/juan.html');
                     }
                 });
 
@@ -87,7 +87,6 @@
                         sessionStorage.setItem("resistencia",resistencia);
                         sessionStorage.setItem("money",money);
                         //alert("Usuario: " + user + "\nVida:"+ vida+ "\nmoney:"+money);
-
                     }
 
                 });

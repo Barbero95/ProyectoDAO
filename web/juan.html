@@ -22,16 +22,14 @@
     <script>
 
         $(document).ready(function () {
-            var url = "http://localhost:8080/myapp/json";
+            var url = 'http://localhost:8080/myapp/json';
             console.log("ready!");
             var user = sessionStorage.getItem("user");
             var money = sessionStorage.getItem("money");
             alert("Usuario: " + user + "\nMoney: " + money);
             
             $("#btA").click(function () {
-
                 alert("Usuario: " + user + "\nMoney: " + money);
-
             });
         });
     </script>
