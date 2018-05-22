@@ -28,9 +28,12 @@
             console.log("ready!");
             var urlRest = 'http://147.83.7.206:8080/myapp/json';
             var urlRest2 = "http://147.83.7.206:8080";
+            var url = "http://localhost:8080/myapp/json";
+            var url2 = "http://localhost:8080";
+
             $("#buttonLogin").click(function () {
                 $.ajax({
-                    url: urlRest + '/login',
+                    url: url + '/login',
                     type: 'post',
                     dataType: 'json',
                     contentType: 'application/json',
@@ -38,12 +41,15 @@
                         username: $("#username").val(),
                         password: $("#password").val()
                     }),
+
                     success: function (data, status) {
                         alert("Data: " + data + "\nStatus: " + status);
-
-                        window.location.assign(urlRest2+"/juan.html");
+                        getUsuario();
+                        window.location.assign(url2+"/juan.html");
                     }
                 });
+
+
             });
             <!-- Latest compiled JavaScript -->
             $("#buttonconsulta").click(function () {
@@ -60,30 +66,30 @@
             });
             function getUsuario() {
                 $.ajax({
-                    url: urlRest + '/consultarUser',
+                    url: url + '/consultarUser',
                     type: 'post',
                     dataType: 'json',
                     contentType: 'application/json',
                     data: JSON.stringify({
-                        username: $("#username").val(),
-                        password: $("#password").val()
+                        username: $("#username").val()
                     }),
                     success: function (data) {
-                        var jsonObj = JSON.parse(data);
-                        var user = jsonObj.nombre;
-                        var vida = jsonObj.vida;
-                        var ataque = jsonObj.ataque;
-                        var defensa = jsonObj.defensa;
-                        var resistencia = jsonObj.resistencia;
-                        var money = jsonObj.money;
+                        var user =  data.nombre;
+                        var vida = data.vida;
+                        var ataque = data.ataque;
+                        var defensa = data.defensa;
+                        var resistencia = data.resistencia;
+                        var money = data.money;
                         sessionStorage.setItem("user",user);
                         sessionStorage.setItem("vida",vida);
                         sessionStorage.setItem("ataque",ataque);
                         sessionStorage.setItem("defensa",defensa);
                         sessionStorage.setItem("resistencia",resistencia);
                         sessionStorage.setItem("money",money);
-                        alert("Usuario: " + user + "\nVida:"+ vida+ "\nmoney:"+money);
+                        //alert("Usuario: " + user + "\nVida:"+ vida+ "\nmoney:"+money);
+
                     }
+
                 });
             }
             $("#buttonSignup").click(function () {

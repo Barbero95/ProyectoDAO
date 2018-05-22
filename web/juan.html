@@ -20,39 +20,27 @@
     <!--<<script rel="stylesheet" href="js/funciones.js"></script>>-->
 
     <script>
+
         $(document).ready(function () {
+            var url = "http://localhost:8080/myapp/json";
             console.log("ready!");
             var user = sessionStorage.getItem("user");
             var money = sessionStorage.getItem("money");
             alert("Usuario: " + user + "\nMoney: " + money);
-            document.getElementById("mon").innerHTML = money;
-
+            
             $("#btA").click(function () {
-                alert("Hola");
-                $.ajax({
-                    url: 'http://localhost:8080/myapp/json/login',
-                    type: 'post',
-                    dataType: 'json',
-                    contentType:'application/json',
-                    success: function (data) {
-                        alert("Data: " + data + "\nStatus: " + status);
-                    },
-                    data: JSON.stringify({
-                        username: $("#name").val(),
-                        password: $("#pass").val()
-                    })
-                });
+
+                alert("Usuario: " + user + "\nMoney: " + money);
+
             });
         });
     </script>
 
 </head>
 <body>
-var mon:
 Nombre: <input id="name"></input><br>
-Password: <input id="pass"></input><br>
 Money: <input id="mon" type="text" size="15" maxlength="30"></input><br>
-<button id="btA">Send an HTTP POST request to a page and get the result back</button>
+<button id="btA">Recargar datos</button>
 
 <script src="js/bootstrap.js"></script>
 </body>

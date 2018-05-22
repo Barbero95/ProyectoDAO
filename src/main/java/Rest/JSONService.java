@@ -90,7 +90,7 @@ public class JSONService {
         if (u == null) {
             return Response.status(409).entity(u).build();
         } else {
-            u.setPassword("0");
+            u.setPassword("***");
             return Response.status(201).entity(u).build();
         }
     }
