@@ -26,18 +26,27 @@
             console.log("ready!");
             var user = sessionStorage.getItem("user");
             var money = sessionStorage.getItem("money");
+            var ataque = sessionStorage.getItem("ataque");
+            var vida = sessionStorage.getItem("vida");
+            var defensa = sessionStorage.getItem("defensa");
+            var resistencia = sessionStorage.getItem("resistencia");
+
             alert("Usuario: " + user + "\nMoney: " + money);
-            
-            $("#btA").click(function () {
-                alert("Usuario: " + user + "\nMoney: " + money);
-            });
+
+            $("#name").text(user);
+            $("#money").text(money);
+
         });
+
     </script>
 
 </head>
 <body>
-Nombre: <input id="name"></input><br>
-Money: <input id="mon" type="text" size="15" maxlength="30"></input><br>
+Nombre: <div id="name"></div>
+Ataque: <div id="ataque"></div>
+Defensa: <div id="defensa"></div>
+Resistencia: <div id="resistencia"></div>
+Money: <div id="money"></div>
 <button id="btA">Recargar datos</button>
 
 <script src="js/bootstrap.js"></script>
