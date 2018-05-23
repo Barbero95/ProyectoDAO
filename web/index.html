@@ -21,6 +21,7 @@
     <!--
     var url = "http://147.83.7.206:8080/myapp/json"
     var url = "http://localhost:8080/myapp/json"
+    //window.location.assign(url2+'/juan.html');
     -->
     <script>
 
@@ -45,7 +46,6 @@
                     success: function (data, status) {
                         alert("Data: " + data + "\nStatus: " + status);
                         getUsuario();
-                        window.location.assign(url2+'/juan.html');
                     }
                 });
 
@@ -86,9 +86,8 @@
                         sessionStorage.setItem("defensa",defensa);
                         sessionStorage.setItem("resistencia",resistencia);
                         sessionStorage.setItem("money",money);
-                        //alert("Usuario: " + user + "\nVida:"+ vida+ "\nmoney:"+money);
+                        window.location.assign(url2+'/juan.html');
                     }
-
                 });
             }
             $("#buttonSignup").click(function () {
