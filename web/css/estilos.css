@@ -9,7 +9,13 @@ body {
 img {
     max-width: 100%;
 }
+table {
+    border-collapse: collapse;
+}
 
+td.sinborde {
+    border: hidden
+}
 
 /* cover */
 #cover {
@@ -56,3 +62,5 @@ img {
 .separacionderecha{
     margin-left: 3mm;
 }
+
+

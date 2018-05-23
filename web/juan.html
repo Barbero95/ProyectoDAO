@@ -34,6 +34,9 @@
             alert("Usuario: " + user + "\nMoney: " + money);
 
             $("#name").text(user);
+            $("#ataque").text(ataque);
+            $("#defensa").text(defensa);
+            $("#resistencia").text(resistencia);
             $("#money").text(money);
 
         });
@@ -42,12 +45,39 @@
 
 </head>
 <body>
-Nombre: <div id="name"></div>
-Ataque: <div id="ataque"></div>
-Defensa: <div id="defensa"></div>
-Resistencia: <div id="resistencia"></div>
-Money: <div id="money"></div>
-<button id="btA">Recargar datos</button>
+<div class="container">
+    <h2>Datos del Jugador</h2>
+    <p>Informacion detallada de tus datos:</p>
+
+
+
+    <table class="table">
+    <tr>
+        <img src="img/Clash-Royale.jpg" class="img-thumbnail"  width="304" height="236">
+        <th>Nombre:</th>
+        <td><div id="name">Nombre:</div></td>
+    </tr>
+    <tr>
+        <th>Ataque:</th>
+        <td><div id="ataque">Ataque:</div></td>
+    </tr>
+    <tr>
+        <th>Defensa:</th>
+        <td><div id="defensa">Defensa:</div></td>
+    </tr>
+    <tr>
+        <th>Resistencia:</th>
+        <td><div id="resistencia">Resistencia:</div></td>
+    </tr>
+    <tr>
+        <th>Dinero:</th>
+        <td><div id="money">Dinero:</div></td>
+    </tr>
+
+
+</table>
+
+</div>
 
 <script src="js/bootstrap.js"></script>
 </body>
