@@ -38,7 +38,7 @@ td.sinborde {
 }
 
 .contenido-seccion {
-    padding: 5rem 0;
+    padding: 2rem 0;
 }
 
 #acerca-de {
@@ -62,5 +62,10 @@ td.sinborde {
 .separacionderecha{
     margin-left: 3mm;
 }
-
+#centrador{
+    position: relative;
+    width: 400px;
+    height: 400px;
+    background-color: red;
+}
 
