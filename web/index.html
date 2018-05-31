@@ -27,10 +27,10 @@
 
         $(document).ready(function () {
             console.log("ready!");
-            var urlRest = 'http://147.83.7.206:8080/myapp/json';
-            var urlRest2 = "http://147.83.7.206:8080";
-            var url = 'http://localhost:8080/myapp/json';
-            var url2 = 'http://localhost:8080';
+            var urldecambio = 'http://localhost:8080/myapp/json';
+            var urldecambio = 'http://localhost:8080';
+            var url = 'http://147.83.7.206:8080/myapp/json';
+            var url2 = 'http://147.83.7.206:8080';
 
             $("#buttonLogin").click(function () {
                 $.ajax({
@@ -55,7 +55,7 @@
             $("#buttonconsulta").click(function () {
                 alert("Hola pesicola");
                 $.ajax({
-                    url: urlhost + '/consultarUsuarioDAO/' + $("#username").val(),
+                    url: url + '/consultarUsuarioDAO/' + $("#username").val(),
                     type: 'get',
                     dataType: 'json',
                     contentType: 'application/json',
@@ -92,7 +92,7 @@
             }
             $("#buttonSignup").click(function () {
                 $.ajax({
-                    url: urlRest +'/newUser',
+                    url: url +'/newUser',
                     type: 'post',
                     dataType: 'json',
                     contentType: 'application/json',
