@@ -66,6 +66,13 @@ public class JSONService {
     public List<Objeto> getListaObjetosUsuario(@PathParam("user") String usuario) throws SQLException, ExceptionDAO {
         return mundo.getListaObjetosUsuario(usuario);
     }
+    //Dame la posicion del mapa y el mapa donde esta el jugador
+    @GET
+    @Path("/damePosYMapa/{user}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Usuario getPosYmapa (@PathParam("user") String usuario) throws SQLException, ExceptionDAO {
+        return mundo.damePosicionYMapa(usuario);
+    }
     @POST
     @Path("/login")
     @Consumes (MediaType.APPLICATION_JSON)
@@ -78,6 +85,20 @@ public class JSONService {
             return Response.status(201).entity(result).build();
         }else{
             //user don't exist
+            result = false;
+            return Response.status(409).entity(result).build();
+        }
+    }
+    @POST
+    @Path("/ponPosYmapa")
+    @Consumes (MediaType.APPLICATION_JSON)
+    public Response postPosYmapa (Usuario u) throws SQLException, ExceptionDAO {
+        boolean result = mundo.ponPosYmapa(u.getNombre(),u.getPosX(),u.getPosY(),u.getMapaActual());
+        if (result){
+            //se han colocado los datos correctamente
+            return Response.status(201).entity(result).build();
+        }else{
+            //error
             result = false;
             return Response.status(409).entity(result).build();
         }

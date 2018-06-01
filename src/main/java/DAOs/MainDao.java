@@ -14,7 +14,7 @@ public class MainDao {
         ObjetoDAO objDAO = new ObjetoDAO();
         Usuario user;
         Objeto obj;
-        user = new Usuario("Pitufo2","x",1,1,1,1,100);
+        user = new Usuario("Pitufo2","x",1,1,1,1,100,1,1,1);
         obj = new Objeto("espada","fuego","esta espada esta muy rota",1,1);
         List<Objeto> listaObjetos;
         try {

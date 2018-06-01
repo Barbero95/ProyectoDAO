@@ -67,7 +67,7 @@ public class MainBasico {
                             e.printStackTrace();
                         }
                     }
-                    Usuario u = new Usuario(nombre, passwordd, Vida, ataque, defensa, resistencia,money);
+                    Usuario u = new Usuario(nombre, passwordd, Vida, ataque, defensa, resistencia,money,0,0,1);
                     if (mun.crearUsuario(u) != false)
                         System.out.println("Usuario añadido.");
                     else

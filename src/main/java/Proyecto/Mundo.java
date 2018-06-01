@@ -27,6 +27,22 @@ public class Mundo {
         connect.desconectar();
         return result;
     }
+    //enviamos ya tod la lista de objetos y el ataque y defensa del usuario para ir ya avanzando,
+    //modificamos la contraseña para no revelarla
+    public Usuario damePosicionYMapa (String username)throws SQLException, ExceptionDAO{
+        connect.conectar();
+        Usuario u = userDao.posYmapa(username);
+        u.setPassword("***");
+        connect.desconectar();
+        u.setObjetoList(getListaObjetosUsuario(username));
+        return u;
+    }
+    public boolean ponPosYmapa (String username,int x, int y, int mapa)throws SQLException, ExceptionDAO{
+        connect.conectar();
+        boolean result = userDao.modPosYMapa(x,y,mapa,username);
+        connect.desconectar();
+        return result;
+    }
     public RespLog resp (String username) throws SQLException, ExceptionDAO {
         Usuario u = consultarUsuarioDAO(username);
         RespLog respLog = new RespLog(u.getNombre(),u.getMoney());

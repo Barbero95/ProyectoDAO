@@ -20,7 +20,7 @@ public class UsuarioDAO {
             return resp;
             //throw new ExceptionDAO("Usuario ya existe");
         } else {
-            String query = "INSERT INTO usuario VALUES (?,?,?,?,?,?,?)";
+            String query = "INSERT INTO usuario VALUES (?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement ps = Conectar.connection.prepareStatement(query);
 
             ps.setString(1, u.getNombre());
@@ -30,6 +30,9 @@ public class UsuarioDAO {
             ps.setInt(5, u.getDefensa());
             ps.setInt(6, u.getResistencia());
             ps.setInt(7, u.getMoney());
+            ps.setInt(8,u.getPosX());
+            ps.setInt(9,u.getPosY());
+            ps.setInt(10,u.getMapaActual());
 
             ps.executeUpdate();
             ps.close();
@@ -50,6 +53,20 @@ public class UsuarioDAO {
             throw new ExceptionDAO("No se ha podido modificar el usuario");
         } finally {
             st.close();
+        }
+    }
+    public boolean modPosYMapa(int posX, int posY, int mapaActual, String username) throws SQLException, ExceptionDAO {
+        Statement st = Conectar.connection.createStatement();
+        boolean result=false;
+        try {
+            String updateExp = "update usuario set posx='" + posX + "', posy='" + posY + "', mapaactual='" + mapaActual + "' where username='" + username + "'";
+            st.executeUpdate(updateExp);
+            result=true;
+        } catch (SQLException ex) {
+            throw new ExceptionDAO("No se ha podido modificar el usuario");
+        } finally {
+            st.close();
+            return result;
         }
     }
     public void modificarDefensa(String username, String defensa) throws SQLException, ExceptionDAO {
@@ -121,6 +138,27 @@ public class UsuarioDAO {
         rs.close();
         st.close();
 
+        return user;
+    }
+    //dame la posicion y mapa tambien enviaremos la info del jugador menos contra para luchar contra los malos
+    public Usuario posYmapa(String username) throws SQLException{
+        Usuario user = new Usuario();
+        String select = "SELECT * FROM usuario WHERE username='" + username + "'";
+        Statement st = Conectar.connection.createStatement();
+        ResultSet rs = st.executeQuery(select);
+        if (rs.next()) {
+            user.setNombre(rs.getString("username"));
+            user.setVida(rs.getInt("vida"));
+            user.setAtaque(rs.getInt("ataque"));
+            user.setDefensa(rs.getInt("defensa"));
+            user.setResistencia(rs.getInt("resistencia"));
+            user.setMoney(rs.getInt("money"));
+            user.setPosX(rs.getInt("posx"));
+            user.setPosY(rs.getInt("posy"));
+            user.setMapaActual(rs.getInt("mapaactual"));
+        }
+        rs.close();
+        st.close();
         return user;
     }
 

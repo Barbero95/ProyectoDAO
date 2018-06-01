@@ -12,12 +12,15 @@ public class Usuario {
     private int defensa;
     private int resistencia;
     private int money;
+    private int posX;
+    private int posY;
+    private int mapaActual;
     private List<Objeto> objetoList = new LinkedList<Objeto>();
 
     public Usuario() {
     }
 
-    public Usuario(String nombre, String password, int vida, int ataque, int defensa, int resistencia, int money){
+    public Usuario(String nombre, String password, int vida, int ataque, int defensa, int resistencia, int money, int posX, int posY, int mapaActual) {
         this.nombre = nombre;
         this.password = password;
         this.vida = vida;
@@ -25,6 +28,16 @@ public class Usuario {
         this.defensa = defensa;
         this.resistencia = resistencia;
         this.money = money;
+        this.posX = posX;
+        this.posY = posY;
+        this.mapaActual = mapaActual;
+    }
+
+    public Usuario(String nombre, int posX, int posY, int mapaActual) {
+        this.nombre = nombre;
+        this.posX = posX;
+        this.posY = posY;
+        this.mapaActual = mapaActual;
     }
 
     public void mostrarPorPantala() {
@@ -36,6 +49,30 @@ public class Usuario {
         System.out.println("RESISTENCIA: " + getResistencia());
 
 
+    }
+
+    public int getPosX() {
+        return posX;
+    }
+
+    public void setPosX(int posX) {
+        this.posX = posX;
+    }
+
+    public int getPosY() {
+        return posY;
+    }
+
+    public void setPosY(int posY) {
+        this.posY = posY;
+    }
+
+    public int getMapaActual() {
+        return mapaActual;
+    }
+
+    public void setMapaActual(int mapaActual) {
+        this.mapaActual = mapaActual;
     }
 
     public String getNombre() {
