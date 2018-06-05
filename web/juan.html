@@ -62,26 +62,30 @@
 
                         success: function (data, status) {
                             alert("Data: " + data + "\nStatus: " + status);
+                            ModAtak();
                         }
                     });
-                    $.ajax({
-                        url: url + '/ModificarAtaque',
-                        type: 'post',
-                        dataType: 'json',
-                        contentType: 'application/json',
-                        data: JSON.stringify({
-                            nombre: user,
-                            ataque: ataque
-                        }),
 
-                        success: function (data, status) {
-                            alert("Data: " + data + "\nStatus: " + status);
-                        }
-                    });
                 }
 
 
             });
+            function ModAtak(){
+            $.ajax({
+                url: url + '/ModificarAtaque',
+                type: 'post',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    nombre: user,
+                    ataque: ataque
+                }),
+
+                success: function (data, status) {
+                    alert("Data: " + data + "\nStatus: " + status);
+                }
+            });
+            }
 
             $("#buttonEscudo").click(function () {
                 if (money<150)
