@@ -43,6 +43,21 @@ public class Mundo {
         connect.desconectar();
         return result;
     }
+
+    public boolean ModificarDinero (String username, int money)throws  SQLException, ExceptionDAO{
+        connect.conectar();
+        boolean result = userDao.modificarDinero(username, money);
+        connect.desconectar();
+        return result;
+    }
+
+    public boolean ModificarAtaque (String username, int ataque)throws  SQLException, ExceptionDAO{
+        connect.conectar();
+        boolean result = userDao.modificarAtaque(username, ataque);
+        connect.desconectar();
+        return result;
+    }
+
     public RespLog resp (String username) throws SQLException, ExceptionDAO {
         Usuario u = consultarUsuarioDAO(username);
         RespLog respLog = new RespLog(u.getNombre(),u.getMoney());

@@ -103,6 +103,37 @@ public class JSONService {
             return Response.status(409).entity(result).build();
         }
     }
+
+    @POST
+    @Path("/RestarDinero")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response DescontarDinero (Money u) throws SQLException, ExceptionDAO{
+        boolean result = mundo.ModificarDinero(u.getUsername(), u.getMoney());
+        if (result){
+            //se han colocado los datos correctamente
+            return Response.status(201).entity(result).build();
+        }else{
+            //error
+            result = false;
+            return Response.status(409).entity(result).build();
+        }
+    }
+
+    @POST
+    @Path("/ModificarAtaque")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response DescontarDinero (Usuario u) throws SQLException, ExceptionDAO{
+        boolean result = mundo.ModificarAtaque(u.getNombre(), u.getAtaque());
+        if (result){
+            //se han colocado los datos correctamente
+            return Response.status(201).entity(result).build();
+        }else{
+            //error
+            result = false;
+            return Response.status(409).entity(result).build();
+        }
+    }
+
     @POST
     @Path("/consultarUser")
     @Consumes(MediaType.APPLICATION_JSON)

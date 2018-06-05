@@ -40,6 +40,219 @@
             $("#resistencia").text(resistencia);
             $("#money").text(money);
 
+            $("#buttonEspada").click(function () {
+                if (money<150)
+                {
+                    alert("NO TIENES DINERO SUFICIENTE");
+                }
+                else{
+                    money = money - 150;
+                    ataque = ataque + 50;
+                    $("#money").text(money);
+                    $("#ataque").text(ataque);
+                    $.ajax({
+                        url: url + '/RestarDinero',
+                        type: 'post',
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            username: user,
+                            money: money
+                        }),
+
+                        success: function (data, status) {
+                            alert("Data: " + data + "\nStatus: " + status);
+                        }
+                    });
+                    $.ajax({
+                        url: url + '/ModificarAtaque',
+                        type: 'post',
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            nombre: user,
+                            ataque: ataque
+                        }),
+
+                        success: function (data, status) {
+                            alert("Data: " + data + "\nStatus: " + status);
+                        }
+                    });
+                }
+
+
+            });
+
+            $("#buttonEscudo").click(function () {
+                if (money<150)
+                {
+                    alert("NO TIENES DINERO SUFICIENTE");
+                }
+                else{
+                    money = money - 150;
+                    defensa = defensa + 50;
+                    $("#money").text(money);
+                    $("#ataque").text(ataque);
+                    $.ajax({
+                        url: url + '/RestarDinero',
+                        type: 'post',
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            username: user,
+                            money: money
+                        }),
+
+                        success: function (data, status) {
+                            alert("Data: " + data + "\nStatus: " + status);
+                        }
+                    });
+                    $.ajax({
+                        url: url + '/ModificarAtaque',
+                        type: 'post',
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            nombre: user,
+                            ataque: ataque
+                        }),
+
+                        success: function (data, status) {
+                            alert("Data: " + data + "\nStatus: " + status);
+                        }
+                    });
+                }
+
+
+            });
+
+            $("#buttonCasco").click(function () {
+                if (money<150)
+                {
+                    alert("NO TIENES DINERO SUFICIENTE");
+                }
+                else{
+                    money = money - 150;
+                    defensa = defensa + 50;
+                    $("#money").text(money);
+                    $("#ataque").text(ataque);
+                    $.ajax({
+                        url: url + '/RestarDinero',
+                        type: 'post',
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            username: user,
+                            money: money
+                        }),
+
+                        success: function (data, status) {
+                            alert("Data: " + data + "\nStatus: " + status);
+                        }
+                    });
+                    $.ajax({
+                        url: url + '/ModificarAtaque',
+                        type: 'post',
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            nombre: user,
+                            ataque: ataque
+                        }),
+
+                        success: function (data, status) {
+                            alert("Data: " + data + "\nStatus: " + status);
+                        }
+                    });
+                }
+
+
+            });
+            $("#buttonArmadura").click(function () {
+                if (money<150)
+                {
+                    alert("NO TIENES DINERO SUFICIENTE");
+                }
+                else{
+                    money = money - 150;
+                    defensa = defensa + 50;
+                    $("#money").text(money);
+                    $("#ataque").text(ataque);
+                    $.ajax({
+                        url: url + '/RestarDinero',
+                        type: 'post',
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            username: user,
+                            money: money
+                        }),
+
+                        success: function (data, status) {
+                            alert("Data: " + data + "\nStatus: " + status);
+                        }
+                    });
+                    $.ajax({
+                        url: url + '/ModificarAtaque',
+                        type: 'post',
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            nombre: user,
+                            ataque: ataque
+                        }),
+
+                        success: function (data, status) {
+                            alert("Data: " + data + "\nStatus: " + status);
+                        }
+                    });
+                }
+
+
+            });
+
+            $("#buttonPocion").click(function () {
+                if (money<150)
+                {
+                    alert("NO TIENES DINERO SUFICIENTE");
+                }
+                else{
+                    money = money - 150;
+                    vida = vida + 100;
+                    $("#money").text(money);
+                    $("#ataque").text(ataque);
+                    $.ajax({
+                        url: url + '/RestarDinero',
+                        type: 'post',
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            username: user,
+                            money: money
+                        }),
+
+                        success: function (data, status) {
+                            alert("Data: " + data + "\nStatus: " + status);
+                        }
+                    });
+                    $.ajax({
+                        url: url + '/ModificarAtaque',
+                        type: 'post',
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            nombre: user,
+                            ataque: ataque
+                        }),
+
+                        success: function (data, status) {
+                            alert("Data: " + data + "\nStatus: " + status);
+                        }
+                    });
+                }
+
+
+            });
         });
 
     </script>
@@ -49,9 +262,7 @@
 <div class="container">
     <h2>Datos del Jugador</h2>
     <p>Informacion detallada de tus datos:</p>
-    <div id="centrador">
     <img src="img/Clash-Royale.jpg" class="img-thumbnail"  width="304" height="236">
-    </div>
     <table class="table">
     <tr>
         <th>Nombre:</th>
@@ -95,7 +306,7 @@
                                  alt="Card image cap">
                             <div class="card-body">
                                 <p class="card-text">Precio: XXX</p>
-                                <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">COMPRAR
+                                <button id="buttonEspada" class="btn btn-primary" data-toggle="modal" data-target="#myModal">COMPRAR
                                 </button>
                             </div>
                         </div>
@@ -109,7 +320,7 @@
                                  alt="escribiendo ideas">
                             <div class="card-body">
                                 <p class="card-text">Precio: XXX</p>
-                                <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">COMPRAR
+                                <button id="buttonEscudo" class="btn btn-primary" data-toggle="modal" data-target="#myModal">COMPRAR
                                 </button>
                             </div>
                         </div>
@@ -122,7 +333,7 @@
                                  alt="programación y sistemas TI">
                             <div class="card-body">
                                 <p class="card-text">Precio: XXX</p>
-                                <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">COMPRAR
+                                <button id="buttonArmadura" class="btn btn-primary" data-toggle="modal" data-target="#myModal">COMPRAR
                                 </button>
                             </div>
                         </div>
@@ -148,7 +359,7 @@
                                  alt="Card image cap">
                             <div class="card-body">
                                 <p class="card-text">Precio: XXX</p>
-                                <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">COMPRAR
+                                <button id="buttonPocion" class="btn btn-primary" data-toggle="modal" data-target="#myModal">COMPRAR
                                 </button>
                             </div>
                         </div>
@@ -162,7 +373,7 @@
                                  alt="escribiendo ideas">
                             <div class="card-body">
                                 <p class="card-text">Precio: XXX</p>
-                                <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">COMPRAR
+                                <button id="buttonCasco" class="btn btn-primary" data-toggle="modal" data-target="#myModal">COMPRAR
                                 </button>
                             </div>
                         </div>
@@ -175,7 +386,7 @@
                                  alt="programación y sistemas TI">
                             <div class="card-body">
                                 <p class="card-text">Precio: XXX</p>
-                                <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">COMPRAR
+                                <button id="buttonDinero" class="btn btn-primary" data-toggle="modal" data-target="#myModal">COMPRAR
                                 </button>
                             </div>
                         </div>

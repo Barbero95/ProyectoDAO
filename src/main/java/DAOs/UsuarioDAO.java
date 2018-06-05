@@ -43,16 +43,20 @@ public class UsuarioDAO {
     }
 
     //UPDATES
-    public void modificarAtaque(String username, String ataque) throws SQLException, ExceptionDAO {
+    public boolean modificarAtaque(String username, int ataque) throws SQLException, ExceptionDAO {
         Statement st = Conectar.connection.createStatement();
+        boolean result = false;
         try {
             String updateExp = "update usuario set ataque='" + ataque + "' where username='" + username + "'";
             st.executeUpdate(updateExp);
+            result = true;
+            return result;
 
         } catch (SQLException ex) {
             throw new ExceptionDAO("No se ha podido modificar el usuario");
         } finally {
             st.close();
+            return result;
         }
     }
     public boolean modPosYMapa(int posX, int posY, int mapaActual, String username) throws SQLException, ExceptionDAO {
@@ -81,28 +85,36 @@ public class UsuarioDAO {
             st.close();
         }
     }
-    public void modificarResistencia(String username, String resistencia) throws SQLException, ExceptionDAO {
+    public boolean modificarResistencia(String username, String resistencia) throws SQLException, ExceptionDAO {
         Statement st = Conectar.connection.createStatement();
+        boolean result = false;
         try {
             String updateExp = "update usuario set resistencia='" + resistencia + "' where username='" + username + "'";
             st.executeUpdate(updateExp);
+            result = true;
+            return result;
 
         } catch (SQLException ex) {
             throw new ExceptionDAO("No se ha podido modificar el usuario");
         } finally {
             st.close();
+            return result;
         }
     }
-    public void modificarDinero (String username, int moneyNow) throws SQLException, ExceptionDAO{
+    public boolean modificarDinero (String username, int moneyNow) throws SQLException, ExceptionDAO{
         Statement st = Conectar.connection.createStatement();
+        boolean result = false;
         try {
             String updateExp = "update usuario set money='" + moneyNow + "' where username='" + username + "'";
             st.executeUpdate(updateExp);
+            result = true;
+            return result;
 
         } catch (SQLException ex) {
             throw new ExceptionDAO("No se ha podido modificar el usuario");
         } finally {
             st.close();
+            return result;
         }
     }
 
