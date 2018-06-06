@@ -122,8 +122,38 @@ public class JSONService {
     @POST
     @Path("/ModificarAtaque")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response DescontarDinero (Usuario u) throws SQLException, ExceptionDAO{
+    public Response ModificarAtak (Usuario u) throws SQLException, ExceptionDAO{
         boolean result = mundo.ModificarAtaque(u.getNombre(), u.getAtaque());
+        if (result){
+            //se han colocado los datos correctamente
+            return Response.status(201).entity(result).build();
+        }else{
+            //error
+            result = false;
+            return Response.status(409).entity(result).build();
+        }
+    }
+
+    @POST
+    @Path("/ModificarDefensa")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response ModificarDef (Usuario u) throws SQLException, ExceptionDAO{
+        boolean result = mundo.ModificarDefensa(u.getNombre(), u.getDefensa());
+        if (result){
+            //se han colocado los datos correctamente
+            return Response.status(201).entity(result).build();
+        }else{
+            //error
+            result = false;
+            return Response.status(409).entity(result).build();
+        }
+    }
+
+    @POST
+    @Path("/ModificarVida")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response ModificarVid (Usuario u) throws SQLException, ExceptionDAO{
+        boolean result = mundo.ModificarVida(u.getNombre(), u.getVida());
         if (result){
             //se han colocado los datos correctamente
             return Response.status(201).entity(result).build();

@@ -73,19 +73,39 @@ public class UsuarioDAO {
             return result;
         }
     }
-    public void modificarDefensa(String username, String defensa) throws SQLException, ExceptionDAO {
+    public boolean modificarDefensa(String username, int defensa) throws SQLException, ExceptionDAO {
         Statement st = Conectar.connection.createStatement();
+        boolean result = false;
         try {
             String updateExp = "update usuario set defensa='" + defensa + "' where username='" + username + "'";
             st.executeUpdate(updateExp);
+            result = true;
 
         } catch (SQLException ex) {
             throw new ExceptionDAO("No se ha podido modificar el usuario");
         } finally {
             st.close();
+            return result;
         }
     }
-    public boolean modificarResistencia(String username, String resistencia) throws SQLException, ExceptionDAO {
+
+    public boolean modificarVida(String username, int vida) throws SQLException, ExceptionDAO {
+        Statement st = Conectar.connection.createStatement();
+        boolean result = false;
+        try {
+            String updateExp = "update usuario set vida='" + vida + "' where username='" + username + "'";
+            st.executeUpdate(updateExp);
+            result = true;
+
+        } catch (SQLException ex) {
+            throw new ExceptionDAO("No se ha podido modificar el usuario");
+        } finally {
+            st.close();
+            return result;
+        }
+    }
+
+    public boolean modificarResistencia(String username, int resistencia) throws SQLException, ExceptionDAO {
         Statement st = Conectar.connection.createStatement();
         boolean result = false;
         try {
