@@ -148,7 +148,8 @@ public class ObjetoDAO {
     }
 
     //inventari
-    public void insertInventario (Usuario user, Objeto obj) throws SQLException{
+    public boolean insertInventario (Usuario user, Objeto obj) throws SQLException{
+        boolean faena = true;
         String query = "INSERT INTO inventario VALUES (NULL,?,?)";
         PreparedStatement ps = Conectar.connection.prepareStatement(query);
 
@@ -157,6 +158,7 @@ public class ObjetoDAO {
 
         ps.executeUpdate();
         ps.close();
+        return faena;
     }
     public boolean sacarDeInventario (Usuario user, int idObjeto)throws SQLException{
         boolean result = false;

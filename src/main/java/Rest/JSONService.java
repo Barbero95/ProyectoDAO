@@ -123,7 +123,9 @@ public class JSONService {
     @Path("/ModificarAtaque")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response ModificarAtak (Usuario u) throws SQLException, ExceptionDAO{
+        int i = 1;
         boolean result = mundo.ModificarAtaque(u.getNombre(), u.getAtaque());
+        boolean result2 = mundo.añadirObjetoAUsuarioDAO(u.getNombre(), i);
         if (result){
             //se han colocado los datos correctamente
             return Response.status(201).entity(result).build();
@@ -135,10 +137,46 @@ public class JSONService {
     }
 
     @POST
-    @Path("/ModificarDefensa")
+    @Path("/ModificarDefensaEscudo")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response ModificarDefEsc (Usuario u) throws SQLException, ExceptionDAO{
+        int i = 2;
+        boolean result = mundo.ModificarDefensa(u.getNombre(), u.getDefensa());
+        boolean result2 = mundo.añadirObjetoAUsuarioDAO(u.getNombre(), i);
+        if (result){
+            //se han colocado los datos correctamente
+            return Response.status(201).entity(result).build();
+        }else{
+            //error
+            result = false;
+            return Response.status(409).entity(result).build();
+        }
+    }
+
+    @POST
+    @Path("/ModificarDefensaArmadura")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response ModificarDefArmadura (Usuario u) throws SQLException, ExceptionDAO{
+        int i = 3;
+        boolean result = mundo.ModificarDefensa(u.getNombre(), u.getDefensa());
+        boolean result2 = mundo.añadirObjetoAUsuarioDAO(u.getNombre(), i);
+        if (result){
+            //se han colocado los datos correctamente
+            return Response.status(201).entity(result).build();
+        }else{
+            //error
+            result = false;
+            return Response.status(409).entity(result).build();
+        }
+    }
+
+    @POST
+    @Path("/ModificarDefensaCasco")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response ModificarDef (Usuario u) throws SQLException, ExceptionDAO{
+        int i = 5;
         boolean result = mundo.ModificarDefensa(u.getNombre(), u.getDefensa());
+        boolean result2 = mundo.añadirObjetoAUsuarioDAO(u.getNombre(), i);
         if (result){
             //se han colocado los datos correctamente
             return Response.status(201).entity(result).build();
@@ -150,10 +188,12 @@ public class JSONService {
     }
 
     @POST
-    @Path("/ModificarVida")
+    @Path("/ModificarResis")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response ModificarVid (Usuario u) throws SQLException, ExceptionDAO{
-        boolean result = mundo.ModificarVida(u.getNombre(), u.getVida());
+    public Response ModificarRes (Usuario u) throws SQLException, ExceptionDAO{
+        int i = 4;
+        boolean result = mundo.ModificarRes(u.getNombre(), u.getResistencia());
+        boolean result2 = mundo.añadirObjetoAUsuarioDAO(u.getNombre(), i);
         if (result){
             //se han colocado los datos correctamente
             return Response.status(201).entity(result).build();
@@ -163,7 +203,22 @@ public class JSONService {
             return Response.status(409).entity(result).build();
         }
     }
-
+/*
+    @POST
+    @Path("/addObjectAUser")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response AddObj (Usuario u, int i) throws SQLException, ExceptionDAO{
+        boolean result = mundo.añadirObjetoAUsuarioDAO(u.getNombre(), i);
+        if (result){
+            //se han colocado los datos correctamente
+            return Response.status(201).entity(result).build();
+        }else{
+            //error
+            result = false;
+            return Response.status(409).entity(result).build();
+        }
+    }
+*/
     @POST
     @Path("/consultarUser")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -200,7 +255,7 @@ public class JSONService {
             return Response.status(409).entity(result).build();
         }
     }
-
+/*
     @POST
     @Path("/addObjectAUser")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -222,6 +277,8 @@ public class JSONService {
             }
         }
     }
+
+    */
     // como ya estara logeado no hace falta pedir el password con el username ya directamente eliminamos el usuario
     @POST
     @Path("/deleteUser")

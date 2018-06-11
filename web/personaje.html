@@ -31,6 +31,7 @@
             var vida = sessionStorage.getItem("vida");
             var defensa = sessionStorage.getItem("defensa");
             var resistencia = sessionStorage.getItem("resistencia");
+            var id = 0;
             //var suma = parseInt(50);
             //var prueba = parseInt(ataque.value);
             //alert("Usuario: " + user + "\nMoney: " + money);
@@ -59,15 +60,47 @@
                     }
                 });
             }
-            function ModDef(){
+            function ModDefEsc(){
                 $.ajax({
-                    url: url + '/ModificarDefensa',
+                    url: url + '/ModificarDefensaEscudo',
                     type: 'post',
                     dataType: 'json',
                     contentType: 'application/json',
                     data: JSON.stringify({
                         nombre: user,
-                        ataque: defensa
+                        defensa: defensa
+                    }),
+
+                    success: function (data, status) {
+                        alert("Data: " + data + "\nStatus: " + status);
+                    }
+                });
+            }
+            function ModDefArm(){
+                $.ajax({
+                    url: url + '/ModificarDefensaArmadura',
+                    type: 'post',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        nombre: user,
+                        defensa: defensa
+                    }),
+
+                    success: function (data, status) {
+                        alert("Data: " + data + "\nStatus: " + status);
+                    }
+                });
+            }
+            function ModDefCasc(){
+                $.ajax({
+                    url: url + '/ModificarDefensaCasco',
+                    type: 'post',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        nombre: user,
+                        defensa: defensa
                     }),
 
                     success: function (data, status) {
@@ -76,15 +109,33 @@
                 });
             }
 
-            function ModVida(){
+            function ModResis(){
                 $.ajax({
-                    url: url + '/ModificarVida',
+                    url: url + '/ModificarResis',
                     type: 'post',
                     dataType: 'json',
                     contentType: 'application/json',
                     data: JSON.stringify({
                         nombre: user,
-                        ataque: vida
+                        resistencia: resistencia
+                    }),
+
+                    success: function (data, status) {
+                        alert("Data: " + data + "\nStatus: " + status);
+                    }
+                });
+            }
+
+
+            function AddObjeto(){
+                $.ajax({
+                    url: url + '/addObjectAUser',
+                    type: 'post',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        nombre: user,
+                        id: id
                     }),
 
                     success: function (data, status) {
@@ -102,6 +153,7 @@
                     $('#buttonEspada').hide();
                     money = money - 200;
                     ataque = ataque - (-50);
+                    id = 1;
                     $("#money").text(money);
                     $("#ataque").text(ataque);
                     $.ajax({
@@ -149,7 +201,7 @@
 
                         success: function (data, status) {
                             alert("Data: " + data + "\nStatus: " + status);
-                            ModDef();
+                            ModDefEsc();
                         }
                     });
 
@@ -181,7 +233,7 @@
 
                         success: function (data, status) {
                             alert("Data: " + data + "\nStatus: " + status);
-                            ModDef();
+                            ModDefCasc();
                         }
                     });
                 }
@@ -211,7 +263,7 @@
 
                         success: function (data, status) {
                             alert("Data: " + data + "\nStatus: " + status);
-                            ModDef();
+                            ModDefArm();
                         }
                     });
                 }
@@ -227,9 +279,9 @@
                 else{
                     $('#buttonPocion').hide();
                     money = money - 200;
-                    vida = vida - (-100);
+                    resistencia = resistencia - (-100);
                     $("#money").text(money);
-                    $("#vida").text(vida);
+                    $("#resistencia").text(resistencia);
                     $.ajax({
                         url: url + '/RestarDinero',
                         type: 'post',
@@ -242,7 +294,7 @@
 
                         success: function (data, status) {
                             alert("Data: " + data + "\nStatus: " + status);
-                            ModVida();
+                            ModResis();
                         }
                     });
                 }

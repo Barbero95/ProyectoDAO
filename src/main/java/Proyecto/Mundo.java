@@ -65,9 +65,9 @@ public class Mundo {
         return result;
     }
 
-    public boolean ModificarVida (String username, int vida)throws  SQLException, ExceptionDAO{
+    public boolean ModificarRes (String username, int res)throws  SQLException, ExceptionDAO{
         connect.conectar();
-        boolean result = userDao.modificarVida(username, vida);
+        boolean result = userDao.modificarResistencia(username, res);
         connect.desconectar();
         return result;
     }
@@ -131,10 +131,13 @@ public class Mundo {
 
     }
     //añade a inventario la realcion entre el usuario y el objeto
-    public void añadirObjetoAUsuarioDAO (Usuario u, Objeto o) throws SQLException, ExceptionDAO{
+    public boolean añadirObjetoAUsuarioDAO (String user, int id) throws SQLException, ExceptionDAO{
         connect.conectar();
-        objDAO.insertInventario(u,o);
+        Usuario u = userDao.infoUser(user);
+        Objeto o = objDAO.returnObject(id);
+        boolean result = objDAO.insertInventario(u,o);
         connect.desconectar();
+        return result;
     }
     public Objeto consultarObjetoDeUsuarioDAO (Usuario user, int idObjeto)throws SQLException, ExceptionDAO{
         connect.conectar();
