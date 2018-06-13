@@ -124,8 +124,11 @@ public class JSONService {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response ModificarAtak (Usuario u) throws SQLException, ExceptionDAO{
         int i = 1;
-        boolean result = mundo.ModificarAtaque(u.getNombre(), u.getAtaque());
+        boolean result = false;
         boolean result2 = mundo.añadirObjetoAUsuarioDAO(u.getNombre(), i);
+        if(result2){
+            result = mundo.ModificarAtaque(u.getNombre(), u.getAtaque());
+        }
         if (result){
             //se han colocado los datos correctamente
             return Response.status(201).entity(result).build();
