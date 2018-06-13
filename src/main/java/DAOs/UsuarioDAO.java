@@ -59,11 +59,11 @@ public class UsuarioDAO {
             return result;
         }
     }
-    public boolean modPosYMapa(int posX, int posY, int mapaActual, String username) throws SQLException, ExceptionDAO {
+    public boolean modPosYMapa(int posX, int posY, int mapaActual, int vida, String username) throws SQLException, ExceptionDAO {
         Statement st = Conectar.connection.createStatement();
         boolean result=false;
         try {
-            String updateExp = "update usuario set posx='" + posX + "', posy='" + posY + "', mapaactual='" + mapaActual + "' where username='" + username + "'";
+            String updateExp = "update usuario set posx='" + posX + "', posy='" + posY + "', mapaactual='" + mapaActual + "', vida='" + vida + "' where username='" + username + "'";
             st.executeUpdate(updateExp);
             result=true;
         } catch (SQLException ex) {

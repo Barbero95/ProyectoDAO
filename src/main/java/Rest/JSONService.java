@@ -93,7 +93,7 @@ public class JSONService {
     @Path("/ponPosYmapa")
     @Consumes (MediaType.APPLICATION_JSON)
     public Response postPosYmapa (Usuario u) throws SQLException, ExceptionDAO {
-        boolean result = mundo.ponPosYmapa(u.getNombre(),u.getPosX(),u.getPosY(),u.getMapaActual());
+        boolean result = mundo.ponPosYmapa(u.getNombre(),u.getPosX(),u.getPosY(),u.getMapaActual(),u.getVida());
         if (result){
             //se han colocado los datos correctamente
             return Response.status(201).entity(result).build();
@@ -255,7 +255,7 @@ public class JSONService {
             return Response.status(409).entity(result).build();
         }
     }
-/*
+
     @POST
     @Path("/addObjectAUser")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -263,22 +263,17 @@ public class JSONService {
         String user = datos.get(0);
         String idObj = datos.get(1);
         int id =  Integer.parseInt(idObj);
-        Usuario u = mundo.consultarUsuarioDAO(user);
+        boolean result = mundo.añadirObjetoAUsuarioDAO(user, id);
+        if (result){
+            return Response.status(201).entity(result).build();
 
-        if (u == null) {
-            return Response.status(409).entity("User don't exist").build();
-        } else {
-            Objeto o = mundo.consultarObjetoDAO(id);
-            if (o==null){
-                return Response.status(409).entity("Object don't exist").build();
-            }else{
-                mundo.añadirObjetoAUsuarioDAO(u, o);
-                return Response.status(201).entity("Object added correctly").build();
-            }
+        }else{
+            result=false;
+            return Response.status(409).entity(result).build();
         }
     }
 
-    */
+
     // como ya estara logeado no hace falta pedir el password con el username ya directamente eliminamos el usuario
     @POST
     @Path("/deleteUser")

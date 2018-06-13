@@ -37,9 +37,9 @@ public class Mundo {
         u.setObjetoList(getListaObjetosUsuario(username));
         return u;
     }
-    public boolean ponPosYmapa (String username,int x, int y, int mapa)throws SQLException, ExceptionDAO{
+    public boolean ponPosYmapa (String username,int x, int y, int mapa, int vida)throws SQLException, ExceptionDAO{
         connect.conectar();
-        boolean result = userDao.modPosYMapa(x,y,mapa,username);
+        boolean result = userDao.modPosYMapa(x,y,mapa,vida,username);
         connect.desconectar();
         return result;
     }
@@ -132,11 +132,24 @@ public class Mundo {
     }
     //añade a inventario la realcion entre el usuario y el objeto
     public boolean añadirObjetoAUsuarioDAO (String user, int id) throws SQLException, ExceptionDAO{
+        boolean re = true;
+        boolean result=true;
         connect.conectar();
+        //se deberia comprobar que no sea null en un futuro
         Usuario u = userDao.infoUser(user);
         Objeto o = objDAO.returnObject(id);
-        boolean result = objDAO.insertInventario(u,o);
         connect.desconectar();
+        List<Objeto> listaObjetos = getListaObjetosUsuario(user);
+        for (Objeto objec : listaObjetos){
+            if(objec.getId()==id){
+                result=false;
+            }
+        }
+        if(result){
+            connect.conectar();
+            result = objDAO.insertInventario(u,o);
+            connect.desconectar();
+        }
         return result;
     }
     public Objeto consultarObjetoDeUsuarioDAO (Usuario user, int idObjeto)throws SQLException, ExceptionDAO{
