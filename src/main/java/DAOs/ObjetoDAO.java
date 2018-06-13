@@ -218,6 +218,27 @@ public class ObjetoDAO {
         return objeto;
     }
 
+    public boolean objetoDeUnUsuarioWEB (Usuario user, int idObj)throws SQLException, ExceptionDAO {
+        boolean resultado = true;
+
+        String query = "SELECT objeto FROM inventario WHERE usuario='" + user.getNombre() + "'";
+        Statement st = Conectar.connection.createStatement();
+        ResultSet rs = st.executeQuery(query);
+        Objeto objeto = null;
+
+        if (rs.next()) {
+            objeto = returnObject(rs.getInt("objeto"));
+        }
+        if(idObj != objeto.getId()){
+            resultado = false;
+        }
+
+        rs.close();
+        st.close();
+
+        return resultado;
+    }
+
 }
 
 
