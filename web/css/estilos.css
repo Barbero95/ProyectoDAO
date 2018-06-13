@@ -27,6 +27,23 @@ td.sinborde {
     display: flex;
     align-items: center;
 }
+#datosjugador {
+    background: #222 url('../img/ladrillos.jpg') center center no-repeat;
+    background-size: cover;
+    color: white;
+    height: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+#cover-jugador {
+    width: 100%;
+
+}
+
+#cover-jugador .form-inline{
+    width: 100%;
+}
 
 #cover-texto {
     width: 100%;
@@ -68,4 +85,9 @@ td.sinborde {
     height: 400px;
     background-color: red;
 }
-
+.pull-left {
+    float: left !important;
+}
+.pull-right {
+    float: right !important;
+}
