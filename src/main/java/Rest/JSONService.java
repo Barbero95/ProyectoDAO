@@ -174,6 +174,22 @@ public class JSONService {
     }
 
     @POST
+    @Path("/ConsularObjetoUsuarioWEB")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response ConsultarObjetoUsuarioWEB (Usuario u) throws SQLException, ExceptionDAO{
+        int i = 1;
+        boolean result = mundo.consultarObjetoDeUsuarioWEB(u.getNombre(), i);
+        if (result){
+            //se han colocado los datos correctamente
+            return Response.status(201).entity(result).build();
+        }else{
+            //error
+            result = false;
+            return Response.status(409).entity(result).build();
+        }
+    }
+
+    @POST
     @Path("/ModificarDefensaCasco")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response ModificarDef (Usuario u) throws SQLException, ExceptionDAO{

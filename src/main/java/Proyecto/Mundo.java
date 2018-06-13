@@ -152,6 +152,15 @@ public class Mundo {
         }
         return result;
     }
+
+    public boolean consultarObjetoDeUsuarioWEB (String u, int idObjeto)throws SQLException, ExceptionDAO{
+        connect.conectar();
+        Usuario user = userDao.infoUser(u);
+        boolean result = objDAO.objetoDeUnUsuarioWEB(user,idObjeto);
+        connect.desconectar();
+        return result;
+    }
+
     public Objeto consultarObjetoDeUsuarioDAO (Usuario user, int idObjeto)throws SQLException, ExceptionDAO{
         connect.conectar();
         Objeto obj = objDAO.objetoDeUnUsuario(user,idObjeto);
