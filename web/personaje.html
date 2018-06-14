@@ -31,10 +31,15 @@
             var vida = sessionStorage.getItem("vida");
             var defensa = sessionStorage.getItem("defensa");
             var resistencia = sessionStorage.getItem("resistencia");
-            var id = 0;
+            var espada = sessionStorage.getItem("espada");
+            var escudo = sessionStorage.getItem("escudo");
+            var armadura = sessionStorage.getItem("armadura");
+            var pocion = sessionStorage.getItem("pocion");
+            var casco = sessionStorage.getItem("casco");
+            var id = 1;
             //var suma = parseInt(50);
             //var prueba = parseInt(ataque.value);
-            //alert("Usuario: " + user + "\nMoney: " + money);
+            //alert("Usuario: " + user + "\nEspada: " + espada);
 
             $("#name").text(user);
             $("#ataque").text(ataque);
@@ -43,6 +48,27 @@
             $("#vida").text(vida);
             $("#money").text(money);
 
+            if (espada == 1)
+            {
+                $('#buttonEspada').hide();
+            }
+
+            if (escudo == 1)
+            {
+                $('#buttonEscudo').hide();
+            }
+            if (armadura == 1)
+            {
+                $('#buttonArmadura').hide();
+            }
+            if (pocion == 1)
+            {
+                $('#buttonPocion').hide();
+            }
+            if (casco == 1)
+            {
+                $('#buttonCasco').hide();
+            }
 
             function ModAtak(){
                 $.ajax({
@@ -60,6 +86,8 @@
                     }
                 });
             }
+
+
             function ModDefEsc(){
                 $.ajax({
                     url: url + '/ModificarDefensaEscudo',
@@ -302,7 +330,6 @@
 
             });
         });
-
     </script>
 
 </head>

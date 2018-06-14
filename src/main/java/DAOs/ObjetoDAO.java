@@ -219,20 +219,23 @@ public class ObjetoDAO {
     }
 
     public boolean objetoDeUnUsuarioWEB (Usuario user, int idObj)throws SQLException, ExceptionDAO {
-        boolean resultado = true;
+        boolean resultado = false;
 
         String query = "SELECT objeto FROM inventario WHERE usuario='" + user.getNombre() + "'";
         Statement st = Conectar.connection.createStatement();
+        List<Objeto> listaObjetos = new ArrayList<Objeto>();
         ResultSet rs = st.executeQuery(query);
-        Objeto objeto = null;
+
 
         if (rs.next()) {
-            objeto = returnObject(rs.getInt("objeto"));
+            listaObjetos.add(returnObject(rs.getInt("objeto")));
         }
-        if(idObj != objeto.getId()){
-            resultado = false;
+        for(int indice = 0;indice<listaObjetos.size();indice++) {
+            Objeto o = listaObjetos.get(indice);
+            if (idObj == o.getId()) {
+                resultado = true;
+            }
         }
-
         rs.close();
         st.close();
 

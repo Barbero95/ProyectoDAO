@@ -174,11 +174,75 @@ public class JSONService {
     }
 
     @POST
-    @Path("/ConsularObjetoUsuarioWEB")
+    @Path("/ConsularEspadaWEB")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response ConsultarObjetoUsuarioWEB (Usuario u) throws SQLException, ExceptionDAO{
+    public Response ConsultarEspadaUserWEB (Login name) throws SQLException, ExceptionDAO{
         int i = 1;
-        boolean result = mundo.consultarObjetoDeUsuarioWEB(u.getNombre(), i);
+        boolean result = mundo.consultarObjetoDeUsuarioWEB(name.getUsername(), i);
+        if (result){
+            //se han colocado los datos correctamente
+            return Response.status(201).entity(result).build();
+        }else{
+            //error
+            result = false;
+            return Response.status(409).entity(result).build();
+        }
+    }
+
+    @POST
+    @Path("/ConsularEscudoWEB")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response ConsultarEscudoUserWEB (Login name) throws SQLException, ExceptionDAO{
+        int i = 2;
+        boolean result = mundo.consultarObjetoDeUsuarioWEB(name.getUsername(), i);
+        if (result){
+            //se han colocado los datos correctamente
+            return Response.status(201).entity(result).build();
+        }else{
+            //error
+            result = false;
+            return Response.status(409).entity(result).build();
+        }
+    }
+
+    @POST
+    @Path("/ConsularArmaduraWEB")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response ConsultarArmaduraUserWEB (Login name) throws SQLException, ExceptionDAO{
+        int i = 3;
+        boolean result = mundo.consultarObjetoDeUsuarioWEB(name.getUsername(), i);
+        if (result){
+            //se han colocado los datos correctamente
+            return Response.status(201).entity(result).build();
+        }else{
+            //error
+            result = false;
+            return Response.status(409).entity(result).build();
+        }
+    }
+
+    @POST
+    @Path("/ConsularPocionWEB")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response ConsultarPocionUserWEB (Login name) throws SQLException, ExceptionDAO{
+        int i = 4;
+        boolean result = mundo.consultarObjetoDeUsuarioWEB(name.getUsername(), i);
+        if (result){
+            //se han colocado los datos correctamente
+            return Response.status(201).entity(result).build();
+        }else{
+            //error
+            result = false;
+            return Response.status(409).entity(result).build();
+        }
+    }
+
+    @POST
+    @Path("/ConsularCascoWEB")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response ConsultarCascoUserWEB (Login name) throws SQLException, ExceptionDAO{
+        int i = 5;
+        boolean result = mundo.consultarObjetoDeUsuarioWEB(name.getUsername(), i);
         if (result){
             //se han colocado los datos correctamente
             return Response.status(201).entity(result).build();

@@ -31,6 +31,11 @@
             var url2decambio = 'http://147.83.7.206:8080';
             var url = 'http://localhost:8080/myapp/json';
             var url2 = 'http://localhost:8080';
+            var espada = 0;
+            var escudo = 0;
+            var armadura = 0;
+            var pocion = 0;
+            var casco = 0;
 
             $("#buttonLogin").click(function () {
                 $.ajax({
@@ -45,12 +50,134 @@
 
                     success: function (data, status) {
                         alert("Data: " + data + "\nStatus: " + status);
-                        getUsuario();
+                        MirarEspada();
                     }
+
                 });
 
 
             });
+
+            function MirarEspada(){
+                $.ajax({
+                    url: url + '/ConsularEspadaWEB',
+                    type: 'post',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        username: $("#username").val()
+                    }),
+                    success: function (data, status) {
+                        espada = 1;
+                        console.log(espada);
+                        sessionStorage.setItem("espada",espada);
+                        MirarEscudo();
+                    },
+                    error: function(data, status){
+                        espada = 0;
+                        console.log(espada);
+                        sessionStorage.setItem("espada",espada);
+                        MirarEscudo();
+                    }
+                });
+            }
+
+            function MirarEscudo(){
+                $.ajax({
+                    url: url + '/ConsularEscudoWEB',
+                    type: 'post',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        username: $("#username").val()
+                    }),
+                    success: function (data, status) {
+                        escudo = 1;
+                        console.log(escudo);
+                        sessionStorage.setItem("escudo",escudo);
+                        MirarArmadura();
+                    },
+                    error: function(data, status){
+                        escudo = 0;
+                        console.log(escudo);
+                        sessionStorage.setItem("escudo",escudo);
+                        MirarArmadura();
+                    }
+                });
+            }
+
+            function MirarArmadura(){
+                $.ajax({
+                    url: url + '/ConsularArmaduraWEB',
+                    type: 'post',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        username: $("#username").val()
+                    }),
+                    success: function (data, status) {
+                        armadura = 1;
+                        console.log(armadura);
+                        sessionStorage.setItem("armadura",armadura);
+                        MirarPocion();
+                    },
+                    error: function(data, status){
+                        armadura = 0;
+                        console.log(armadura);
+                        sessionStorage.setItem("armadura",armadura);
+                        MirarPocion();
+                    }
+                });
+            }
+
+            function MirarPocion(){
+                $.ajax({
+                    url: url + '/ConsularPocionWEB',
+                    type: 'post',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        username: $("#username").val()
+                    }),
+                    success: function (data, status) {
+                        pocion = 1;
+                        console.log(pocion);
+                        sessionStorage.setItem("pocion",pocion);
+                        MirarCasco();
+                    },
+                    error: function(data, status){
+                        pocion = 0;
+                        console.log(pocion);
+                        sessionStorage.setItem("pocion",pocion);
+                        MirarCasco();
+                    }
+                });
+            }
+
+            function MirarCasco(){
+                $.ajax({
+                    url: url + '/ConsularCascoWEB',
+                    type: 'post',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        username: $("#username").val()
+                    }),
+                    success: function (data, status) {
+                        casco = 1;
+                        console.log(casco);
+                        sessionStorage.setItem("casco",casco);
+                        getUsuario();
+                    },
+                    error: function(data, status){
+                        casco = 0;
+                        console.log(casco);
+                        sessionStorage.setItem("casco",casco);
+                        getUsuario();
+                    }
+                });
+            }
+
             <!-- Latest compiled JavaScript -->
             $("#buttonconsulta").click(function () {
                 alert("Hola pesicola");
