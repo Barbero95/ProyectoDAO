@@ -49,9 +49,13 @@
                     }),
 
                     success: function (data, status) {
-                        alert("Data: " + data + "\nStatus: " + status);
                         MirarEspada();
+                    },
+
+                    error: function(data, status) {
+                        alert("Usuario o contraeña erroneos");
                     }
+
 
                 });
 
@@ -180,7 +184,6 @@
 
             <!-- Latest compiled JavaScript -->
             $("#buttonconsulta").click(function () {
-                alert("Hola pesicola");
                 $.ajax({
                     url: url + '/consultarUsuarioDAO/' + $("#username").val(),
                     type: 'get',
@@ -227,9 +230,9 @@
                         nombre: $("#username").val(),
                         password: $("#password").val(),
                         vida: 100,
-                        ataque: 0,
-                        defensa: 0,
-                        resistencia:0,
+                        ataque: 50,
+                        defensa: 50,
+                        resistencia:50,
                         money: 1000,
                         posX: 10,
                         posY:10,
@@ -237,6 +240,10 @@
                     }),
                     success: function (data, status) {
                         alert("Data: " + data + "\nStatus: " + status);
+                    },
+
+                    error: function(data, status){
+                        alert("Usuario Existente");
                     }
                 });
             });
@@ -310,25 +317,25 @@
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
         <div class="item active">
-            <img src="img/Clash-Royale.jpg" alt="Clash Royale">
+            <img src="img/mapa111.png" alt="MAPA 1" class="center-block">
             <div class="carousel-caption">
-                <h3>Clash Royale</h3>
-                <p>Fotografía profesional</p>
+                <h3>MAPA 1</h3>
+                <p>Nivel Facil</p>
             </div>
         </div>
 
         <div class="item">
-            <img src="img/780864.jpg" alt="Agente">
+            <img src="img/mapa222.png" alt="MAPA 2" class="center-block">
             <div class="carousel-caption">
-                <h3>Tirador profesional</h3>
-                <p>Fotografía profesional</p>
+                <h3>MAPA 2</h3>
+                <p>Nivel Intermedio</p>
             </div>
         </div>
         <div class="item">
-            <img src="img/2016-junio-07-GG-Speed.jpg" alt="Moto">
+            <img src="img/mapa333.png" alt="MAPA 3" class="center-block">
             <div class="carousel-caption">
-                <h3>Carraco</h3>
-                <p>Fotografía profesional</p>
+                <h3>MAPA 3</h3>
+                <p>Nivel Dificil</p>
             </div>
         </div>
     </div>
