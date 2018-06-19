@@ -20,10 +20,9 @@
     <!--<<script rel="stylesheet" href="js/funciones.js"></script>>-->
 
     <script>
-
         $(document).ready(function () {
-            var urldecambio = 'http://147.83.7.206:8080/myapp/json';
-            var url = 'http://localhost:8080/myapp/json';
+            var url = 'http://147.83.7.206:8080/myapp/json';
+            var urlcambio = 'http://localhost:8080/myapp/json';
             console.log("ready!");
             var user = sessionStorage.getItem("user");
             var money = sessionStorage.getItem("money");
@@ -40,19 +39,16 @@
             //var suma = parseInt(50);
             //var prueba = parseInt(ataque.value);
             //alert("Usuario: " + user + "\nEspada: " + espada);
-
             $("#name").text(user);
             $("#ataque").text(ataque);
             $("#defensa").text(defensa);
             $("#resistencia").text(resistencia);
             $("#vida").text(vida);
             $("#money").text(money);
-
             if (espada == 1)
             {
                 $('#buttonEspada').hide();
             }
-
             if (escudo == 1)
             {
                 $('#buttonEscudo').hide();
@@ -69,7 +65,6 @@
             {
                 $('#buttonCasco').hide();
             }
-
             function ModAtak(){
                 $.ajax({
                     url: url + '/ModificarAtaque',
@@ -80,14 +75,11 @@
                         nombre: user,
                         ataque: ataque
                     }),
-
                     success: function (data, status) {
-                        alert("Data: " + data + "\nStatus: " + status);
+                        //alert("Data: " + data + "\nStatus: " + status);
                     }
                 });
             }
-
-
             function ModDefEsc(){
                 $.ajax({
                     url: url + '/ModificarDefensaEscudo',
@@ -98,9 +90,8 @@
                         nombre: user,
                         defensa: defensa
                     }),
-
                     success: function (data, status) {
-                        alert("Data: " + data + "\nStatus: " + status);
+                        //alert("Data: " + data + "\nStatus: " + status);
                     }
                 });
             }
@@ -114,9 +105,8 @@
                         nombre: user,
                         defensa: defensa
                     }),
-
                     success: function (data, status) {
-                        alert("Data: " + data + "\nStatus: " + status);
+                        //alert("Data: " + data + "\nStatus: " + status);
                     }
                 });
             }
@@ -130,13 +120,11 @@
                         nombre: user,
                         defensa: defensa
                     }),
-
                     success: function (data, status) {
-                        alert("Data: " + data + "\nStatus: " + status);
+                        //alert("Data: " + data + "\nStatus: " + status);
                     }
                 });
             }
-
             function ModResis(){
                 $.ajax({
                     url: url + '/ModificarResis',
@@ -147,14 +135,11 @@
                         nombre: user,
                         resistencia: resistencia
                     }),
-
                     success: function (data, status) {
-                        alert("Data: " + data + "\nStatus: " + status);
+                        //alert("Data: " + data + "\nStatus: " + status);
                     }
                 });
             }
-
-
             function AddObjeto(){
                 $.ajax({
                     url: url + '/addObjectAUser',
@@ -165,13 +150,11 @@
                         nombre: user,
                         id: id
                     }),
-
                     success: function (data, status) {
-                        alert("Data: " + data + "\nStatus: " + status);
+                        //alert("Data: " + data + "\nStatus: " + status);
                     }
                 });
             }
-
             $("#buttonEspada").click(function () {
                 if (money<200)
                 {
@@ -193,19 +176,13 @@
                             username: user,
                             money: money
                         }),
-
                         success: function (data, status) {
-                            alert("Data: " + data + "\nStatus: " + status);
+                            //alert("Data: " + data + "\nStatus: " + status);
                             ModAtak();
                         }
                     });
-
                 }
-
-
             });
-
-
             $("#buttonEscudo").click(function () {
                 if (money<200)
                 {
@@ -226,18 +203,13 @@
                             username: user,
                             money: money
                         }),
-
                         success: function (data, status) {
-                            alert("Data: " + data + "\nStatus: " + status);
+                            //alert("Data: " + data + "\nStatus: " + status);
                             ModDefEsc();
                         }
                     });
-
                 }
-
-
             });
-
             $("#buttonCasco").click(function () {
                 if (money<200)
                 {
@@ -258,15 +230,12 @@
                             username: user,
                             money: money
                         }),
-
                         success: function (data, status) {
-                            alert("Data: " + data + "\nStatus: " + status);
+                            //alert("Data: " + data + "\nStatus: " + status);
                             ModDefCasc();
                         }
                     });
                 }
-
-
             });
             $("#buttonArmadura").click(function () {
                 if (money<200)
@@ -288,17 +257,13 @@
                             username: user,
                             money: money
                         }),
-
                         success: function (data, status) {
-                            alert("Data: " + data + "\nStatus: " + status);
+                            //alert("Data: " + data + "\nStatus: " + status);
                             ModDefArm();
                         }
                     });
                 }
-
-
             });
-
             $("#buttonPocion").click(function () {
                 if (money<200)
                 {
@@ -319,15 +284,12 @@
                             username: user,
                             money: money
                         }),
-
                         success: function (data, status) {
-                            alert("Data: " + data + "\nStatus: " + status);
+                            //alert("Data: " + data + "\nStatus: " + status);
                             ModResis();
                         }
                     });
                 }
-
-
             });
         });
     </script>
@@ -337,7 +299,7 @@
 <section id="datosjugador">
     <div id="cover-jugador">
         <div class="container">
-            <a href="http://localhost:8080/index.html" class="pull-right" class="text-center" class="btn btn-info btn-lg">
+            <a href="http://147.83.7.206:8080/index.html" class="pull-right" class="text-center" class="btn btn-info btn-lg">
                 <span class="glyphicon glyphicon-log-out"></span> Log out
             </a>
             <h2>Datos del Jugador</h2>
